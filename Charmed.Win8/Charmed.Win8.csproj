@@ -126,6 +126,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ShareManager.cs" />
+    <Compile Include="TextBoxHelper.cs" />
     <Compile Include="TileInfo.cs">
       <SubType>Code</SubType>
     </Compile>

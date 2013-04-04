@@ -3,7 +3,7 @@ using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Charmed.Win8
+namespace Charmed
 {
 	public static class ListViewHelper
 	{
