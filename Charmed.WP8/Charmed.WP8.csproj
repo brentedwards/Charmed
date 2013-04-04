@@ -83,6 +83,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Charmed.Win8\Converters\BoolToVisibilityConverter.cs">
+      <Link>Converters\BoolToVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Converters\DateTimeToStringConverter.cs">
+      <Link>Converters\DateTimeToStringConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Converters\InverseBoolConverter.cs">
+      <Link>Converters\InverseBoolConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Converters\InverseBoolToVisibilityConverter.cs">
+      <Link>Converters\InverseBoolToVisibilityConverter.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
