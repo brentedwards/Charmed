@@ -95,6 +95,12 @@
     <Compile Include="..\Charmed.Win8\Converters\InverseBoolToVisibilityConverter.cs">
       <Link>Converters\InverseBoolToVisibilityConverter.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\ISettings.cs">
+      <Link>ISettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Settings.cs">
+      <Link>Settings.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
