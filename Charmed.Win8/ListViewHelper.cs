@@ -5,36 +5,44 @@ using Windows.UI.Xaml.Controls;
 
 namespace Charmed.Win8
 {
-	public static class ListViewItemClick
+	public static class ListViewHelper
 	{
-		public static readonly DependencyProperty MethodNameProperty =
-			DependencyProperty.RegisterAttached("MethodName", typeof(string), typeof(ListViewItemClick), new PropertyMetadata(null, MethodNamePropertyChanged));
+		public static readonly DependencyProperty ItemClickMethodNameProperty =
+			DependencyProperty.RegisterAttached(
+				"ItemClickMethodName",
+				typeof(string),
+				typeof(ListViewHelper),
+				new PropertyMetadata(null, ItemClickMethodNamePropertyChanged));
 
-		public static void SetMethodName(DependencyObject attached, string methodName)
+		public static void SetItemClickMethodName(
+			DependencyObject attached,
+			string itemClickMethodName)
 		{
 			if (attached == null)
 			{
 				throw new ArgumentNullException("attached");
 			}
-			if (methodName == null)
+			if (itemClickMethodName == null)
 			{
-				throw new ArgumentNullException("methodName");
+				throw new ArgumentNullException("itemClickMethodName");
 			}
 
-			attached.SetValue(MethodNameProperty, methodName);
+			attached.SetValue(ItemClickMethodNameProperty, itemClickMethodName);
 		}
 
-		public static string GetMethodName(DependencyObject attached)
+		public static string GetItemClickMethodName(DependencyObject attached)
 		{
 			if (attached == null)
 			{
 				throw new ArgumentNullException("attached");
 			}
 
-			return (string)attached.GetValue(MethodNameProperty);
+			return (string)attached.GetValue(ItemClickMethodNameProperty);
 		}
 
-		private static void MethodNamePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void ItemClickMethodNamePropertyChanged(
+			DependencyObject d,
+			DependencyPropertyChangedEventArgs e)
 		{
 			if (d == null)
 			{
@@ -56,7 +64,7 @@ namespace Charmed.Win8
 			}
 
 			var listView = (ListViewBase)sender;
-			var methodName = GetMethodName(listView);
+			var methodName = GetItemClickMethodName(listView);
 
 			var method = listView.DataContext.GetType().GetTypeInfo().GetDeclaredMethod(methodName);
 			var parms = method.GetParameters();

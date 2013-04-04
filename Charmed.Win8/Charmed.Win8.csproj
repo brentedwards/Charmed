@@ -115,7 +115,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IShareManager.cs" />
-    <Compile Include="ListViewItemClick.cs">
+    <Compile Include="ListViewHelper.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
