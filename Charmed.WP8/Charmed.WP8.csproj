@@ -101,6 +101,9 @@
     <Compile Include="..\Charmed.Win8\Settings.cs">
       <Link>Settings.cs</Link>
     </Compile>
+    <Compile Include="ApplicationBar\BindableApplicationBar.cs" />
+    <Compile Include="ApplicationBar\BindableApplicationBarIconButton.cs" />
+    <Compile Include="ApplicationBar\BindableApplicationBarMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
