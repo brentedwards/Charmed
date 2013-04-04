@@ -114,6 +114,7 @@
     <Compile Include="ISettings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IShareManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondaryPinner.cs">
       <SubType>Code</SubType>
@@ -121,6 +122,7 @@
     <Compile Include="Settings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ShareManager.cs" />
     <Compile Include="TileInfo.cs">
       <SubType>Code</SubType>
     </Compile>
