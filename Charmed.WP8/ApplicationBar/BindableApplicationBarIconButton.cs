@@ -3,6 +3,9 @@ using System;
 
 namespace Charmed.ApplicationBar
 {
+	/// <summary>
+	/// Application Bar Icon Button that allows for routing the click to a method on the view model.
+	/// </summary>
 	public sealed class BindableApplicationBarIconButton : ApplicationBarIconButton
 	{
 		public BindableApplicationBarIconButton()

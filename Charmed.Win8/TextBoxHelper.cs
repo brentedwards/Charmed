@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Charmed
 {
+	/// <summary>
+	/// Helper class to assist with binding text to a view model as soon as it changes.
+	/// </summary>
 	public class TextBoxHelper
 	{
 		public static readonly DependencyProperty BindableTextProperty =

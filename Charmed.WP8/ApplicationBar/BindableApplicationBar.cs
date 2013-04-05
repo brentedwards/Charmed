@@ -2,16 +2,15 @@
 using Microsoft.Phone.Shell;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Charmed.ApplicationBar
 {
+	/// <summary>
+	/// Application Bar which allows Menu Items to be databound.
+	/// </summary>
 	public sealed class BindableApplicationBar : FrameworkElement, IApplicationBar
 	{
 		private readonly Microsoft.Phone.Shell.ApplicationBar applicationBar;

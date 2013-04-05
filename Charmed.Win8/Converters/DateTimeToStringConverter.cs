@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace Charmed.Converters
 {
+	/// <summary>
+	/// Converts a DateTime to a string value.
+	/// </summary>
 	public sealed class DateTimeToStringConverter : IValueConverter
 	{
 		public bool IsDateTimeNullable { get; set; }

@@ -10,6 +10,9 @@ using Windows.UI.Xaml.Data;
 
 namespace Charmed.Converters
 {
+	/// <summary>
+	/// Converts a boolean to a Visibility value.
+	/// </summary>
 	public sealed class BoolToVisibilityConverter : IValueConverter
 	{
 #if WINDOWS_PHONE

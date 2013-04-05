@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace Charmed.Converters
 {
+	/// <summary>
+	/// Inverts a boolean value.
+	/// </summary>
 	public sealed class InverseBoolConverter : IValueConverter
 	{
 #if WINDOWS_PHONE

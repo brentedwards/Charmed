@@ -1,10 +1,12 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Charmed
 {
+	/// <summary>
+	/// Helper class for routing a ListView's ItemClicks to a method on the view model.
+	/// </summary>
 	public class ListViewHelper
 	{
 		public static readonly DependencyProperty ItemClickMethodNameProperty =
