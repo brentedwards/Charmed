@@ -95,11 +95,17 @@
     <Compile Include="..\Charmed.Win8\Converters\InverseBoolToVisibilityConverter.cs">
       <Link>Converters\InverseBoolToVisibilityConverter.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\Helpers\AsyncHelper.cs">
+      <Link>Helpers\AsyncHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\ISettings.cs">
       <Link>ISettings.cs</Link>
     </Compile>
     <Compile Include="..\Charmed.Win8\Settings.cs">
       <Link>Settings.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\ViewModelBase.cs">
+      <Link>ViewModelBase.cs</Link>
     </Compile>
     <Compile Include="ApplicationBar\BindableApplicationBar.cs" />
     <Compile Include="ApplicationBar\BindableApplicationBarIconButton.cs" />
