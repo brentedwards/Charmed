@@ -1,4 +1,5 @@
-﻿using Charmed.Sample.Services;
+﻿using Charmed.Container;
+using Charmed.Sample.Services;
 
 namespace Charmed.Sample.ViewModels
 {
@@ -8,7 +9,15 @@ namespace Charmed.Sample.ViewModels
 		{
 			get
 			{
-				return new MainViewModel(new RssFeedService());
+				return Ioc.Container.Resolve<MainViewModel>();
+			}
+		}
+
+		public FeedItemViewModel FeedItem
+		{
+			get
+			{
+				return Ioc.Container.Resolve<FeedItemViewModel>();
 			}
 		}
 	}

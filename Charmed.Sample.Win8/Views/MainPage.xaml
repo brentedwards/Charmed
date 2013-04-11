@@ -7,10 +7,13 @@
     xmlns:common="using:Charmed.Sample.Win8.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:helpers="using:Charmed.Helpers"
+	xmlns:converters="using:Charmed.Converters"
     mc:Ignorable="d"
 	DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
     <Page.Resources>
+		<converters:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter" />
 
         <!--
             Collection of grouped items displayed by this page, bound to a subset
@@ -44,7 +47,9 @@
             ItemsSource="{Binding Source={StaticResource feedsViewSource}}"
             ItemTemplate="{StaticResource Standard250x250ItemTemplate}"
             SelectionMode="None"
-            IsSwipeEnabled="false">
+            IsSwipeEnabled="false"
+			IsItemClickEnabled="True"
+			helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
 
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>                        
@@ -119,6 +124,13 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Grid.Column="1" IsHitTestVisible="false" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
+		
+		<Border
+			Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+			Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+			Grid.Row="1" Opacity="0.3">
+			<ProgressRing IsActive="{Binding IsBusy}" Width="60" Height="60" />
+		</Border>
 
         <VisualStateManager.VisualStateGroups>
 

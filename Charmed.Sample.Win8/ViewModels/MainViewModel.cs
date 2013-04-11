@@ -8,23 +8,35 @@ namespace Charmed.Sample.ViewModels
 	public sealed class MainViewModel : ViewModelBase
 	{
 		private readonly IRssFeedService rssFeedService;
+		private readonly INavigator navigator;
 
-		public MainViewModel(IRssFeedService rssFeedService)
+		public MainViewModel(
+			IRssFeedService rssFeedService,
+			INavigator navigator)
 		{
 			this.rssFeedService = rssFeedService;
+			this.navigator = navigator;
 		}
 
-		private bool isFeedDataLoading = false;
+		public void ViewFeed(FeedItem feedItem)
+		{
+			this.navigator.NavigateToViewModel<FeedItemViewModel>(feedItem);
+		}
+
 		private List<FeedData> feedData;
 		public List<FeedData> FeedData
 		{
 			get
 			{
-				if (this.feedData == null && !this.isFeedDataLoading)
+				if (this.feedData == null && !this.IsBusy)
 				{
-					this.isFeedDataLoading = true;
+					this.IsBusy = true;
 					AsyncHelper.LoadData(
-						(f) => this.FeedData = f,
+						(f) =>
+						{
+							this.FeedData = f;
+							this.IsBusy = false;
+						},
 						() => this.rssFeedService.GetFeedsAsync());
 				}
 
@@ -32,8 +44,7 @@ namespace Charmed.Sample.ViewModels
 			}
 			private set
 			{
-				this.feedData = value;
-				this.NotifyPropertyChanged("FeedData");
+				this.SetProperty(ref this.feedData, value);
 			}
 		}
 	}
