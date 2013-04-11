@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Charmed
+namespace Charmed.Helpers
 {
 	/// <summary>
 	/// Helper class to assist with binding text to a view model as soon as it changes.

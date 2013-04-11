@@ -16,5 +16,16 @@ namespace Charmed
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+
+		private bool isBusy;
+		public bool IsBusy
+		{
+			get { return this.isBusy; }
+			set
+			{
+				this.isBusy = value;
+				NotifyPropertyChanged("IsBusy");
+			}
+		}
 	}
 }

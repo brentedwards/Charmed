@@ -104,30 +104,37 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container\Ioc.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\InverseBoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="INavigator.cs" />
+    <Compile Include="Container\IContainer.cs" />
+    <Compile Include="Container\SimpleContainer.cs" />
     <Compile Include="ISecondaryPinner.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ISerializer.cs" />
     <Compile Include="ISettings.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IShareManager.cs" />
-    <Compile Include="ListViewHelper.cs">
+    <Compile Include="Helpers\ListViewHelper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondaryPinner.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Serializer.cs" />
     <Compile Include="Settings.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ShareManager.cs" />
-    <Compile Include="TextBoxHelper.cs" />
+    <Compile Include="Helpers\TextBoxHelper.cs" />
     <Compile Include="TileInfo.cs">
       <SubType>Code</SubType>
     </Compile>

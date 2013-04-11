@@ -2,12 +2,12 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Charmed
+namespace Charmed.Helpers
 {
 	/// <summary>
 	/// Helper class for routing a ListView's ItemClicks to a method on the view model.
 	/// </summary>
-	public class ListViewHelper
+	public class ListViewHelper : DependencyObject
 	{
 		public static readonly DependencyProperty ItemClickMethodNameProperty =
 			DependencyProperty.RegisterAttached(
