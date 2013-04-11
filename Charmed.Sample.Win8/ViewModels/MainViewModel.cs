@@ -42,10 +42,7 @@ namespace Charmed.Sample.ViewModels
 
 				return this.feedData;
 			}
-			private set
-			{
-				this.SetProperty(ref this.feedData, value);
-			}
+			private set { this.SetProperty(ref this.feedData, value); }
 		}
 	}
 }
