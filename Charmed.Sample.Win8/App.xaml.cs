@@ -98,6 +98,7 @@ namespace Charmed.Sample.Win8
 			Ioc.Container.Register<IRssFeedService, RssFeedService>();
 			Ioc.Container.Register<ISerializer, Serializer>();
 			Ioc.Container.Register<INavigator, Navigator>();
+			Ioc.Container.Register<IShareManager, ShareManager>();
 			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
 		}
 
