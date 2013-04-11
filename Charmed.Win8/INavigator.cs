@@ -22,6 +22,7 @@ namespace Charmed
 		/// </summary>
 		/// <typeparam name="TViewModel">The type of view model to navigate to.</typeparam>
 		/// <param name="parameter">An optional navigation parameter.</param>
-		void NavigateToViewModel<TViewModel>(object parameter = null);
+		/// <param name="parameterName">The name of the parameter on the view model.</param>
+		void NavigateToViewModel<TViewModel>(object parameter = null, string parameterName = null);
 	}
 }

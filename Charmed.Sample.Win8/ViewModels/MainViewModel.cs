@@ -20,7 +20,7 @@ namespace Charmed.Sample.ViewModels
 
 		public void ViewFeed(FeedItem feedItem)
 		{
-			this.navigator.NavigateToViewModel<FeedItemViewModel>(feedItem);
+			this.navigator.NavigateToViewModel<FeedItemViewModel>(feedItem, "FeedItem");
 		}
 
 		private List<FeedData> feedData;

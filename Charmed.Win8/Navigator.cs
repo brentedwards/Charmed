@@ -17,7 +17,7 @@ namespace Charmed
 			this.container = container;
 		}
 
-		public void NavigateToViewModel<TViewModel>(object parameter = null)
+		public void NavigateToViewModel<TViewModel>(object parameter = null, string parameterName = null)
 		{
 			var viewType = ResolveViewType<TViewModel>();
 
@@ -33,7 +33,7 @@ namespace Charmed
 						var json = args.Parameter.ToString();
 
 						var viewModelType = typeof(TViewModel);
-						var navProperty = viewModelType.GetTypeInfo().GetDeclaredProperty("NavigationParameter");
+						var navProperty = viewModelType.GetTypeInfo().GetDeclaredProperty(parameterName ?? "NavigationParameter");
 
 						if (navProperty != null)
 						{

@@ -7,6 +7,7 @@
     xmlns:common="using:Charmed.Sample.Win8.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:helpers="using:Charmed.Helpers"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -31,11 +32,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+			<TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding FeedItem.Title}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 		
 		<Grid Grid.Row="1">
-			<TextBlock Text="{Binding NavigationParameter.Title}" />
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBlock Text="{Binding FeedItem.Author}" Style="{StaticResource SubheaderTextStyle}" />
+			<WebView
+				helpers:WebViewHelper.HtmlContent="{Binding FeedItem.Content}"
+				Grid.Row="1" />
 		</Grid>
 
         <VisualStateManager.VisualStateGroups>

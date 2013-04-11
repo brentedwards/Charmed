@@ -9,15 +9,11 @@ namespace Charmed.Sample.ViewModels
 {
 	public sealed class FeedItemViewModel : ViewModelBase
 	{
-		private FeedItem navigationParameter;
-		public FeedItem NavigationParameter
+		private FeedItem feedItem;
+		public FeedItem FeedItem
 		{
-			get { return this.navigationParameter; }
-			set
-			{
-				this.navigationParameter = value;
-				NotifyPropertyChanged("NavigationParameter");
-			}
+			get { return this.feedItem; }
+			set { this.SetProperty(ref this.feedItem, value); }
 		}
 	}
 }
