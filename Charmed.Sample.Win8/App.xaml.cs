@@ -58,8 +58,6 @@ namespace Charmed.Sample.Win8
                 //Associate the frame with a SuspensionManager key                                
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
 
-				RegisterIoc();
-
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     // Restore the saved session state only when appropriate
@@ -90,17 +88,6 @@ namespace Charmed.Sample.Win8
             // Ensure the current window is active
             Window.Current.Activate();
         }
-
-		private void RegisterIoc()
-		{
-			Ioc.Container.Register<MainViewModel>();
-			Ioc.Container.Register<FeedItemViewModel>();
-			Ioc.Container.Register<IRssFeedService, RssFeedService>();
-			Ioc.Container.Register<ISerializer, Serializer>();
-			Ioc.Container.Register<INavigator, Navigator>();
-			Ioc.Container.Register<IShareManager, ShareManager>();
-			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
-		}
 
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
