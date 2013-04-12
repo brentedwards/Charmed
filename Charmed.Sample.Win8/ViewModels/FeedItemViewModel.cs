@@ -29,14 +29,13 @@ namespace Charmed.Sample.ViewModels
 			dataPackage.SetUri(this.FeedItem.Link);
 
 			// Add a text only version
-			var text = string.Format("Check this out! {0} by {1} ({2})", this.FeedItem.Title, this.FeedItem.Author, this.FeedItem.Link);
+			var text = string.Format("Check this out! {0} ({1})", this.FeedItem.Title, this.FeedItem.Link);
 			dataPackage.SetText(text);
 
 			// Add an HTML version.
 			var htmlBuilder = new StringBuilder();
-			htmlBuilder.AppendFormat("<h1>{0}</h1>", this.FeedItem.Title);
 			htmlBuilder.AppendFormat("<p>Check this out!</p>", this.FeedItem.Author);
-			htmlBuilder.AppendFormat("<p><a href='{0}'>{1}</a> by {2}</p>", this.FeedItem.Link, this.FeedItem.Title, this.FeedItem.Author);
+			htmlBuilder.AppendFormat("<p><a href='{0}'>{1}</a></p>", this.FeedItem.Link, this.FeedItem.Title);
 			var html = HtmlFormatHelper.CreateHtmlFormat(htmlBuilder.ToString());
 			dataPackage.SetHtmlFormat(html);
 		}
