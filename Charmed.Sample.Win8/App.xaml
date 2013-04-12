@@ -15,6 +15,7 @@
                     Required by Visual Studio project and item templates
                  -->
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
+				<ResourceDictionary Source="Style/CharmedStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Application-specific resources -->

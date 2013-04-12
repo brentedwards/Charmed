@@ -37,49 +37,66 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Horizontal scrolling grid used in most view states -->
-        <GridView
-            x:Name="itemGridView"
-            AutomationProperties.AutomationId="ItemGridView"
-            AutomationProperties.Name="Grouped Items"
-            Grid.RowSpan="2"
-            Padding="116,137,40,46"
-            ItemsSource="{Binding Source={StaticResource feedsViewSource}}"
-            ItemTemplate="{StaticResource Standard250x250ItemTemplate}"
-            SelectionMode="None"
-            IsSwipeEnabled="false"
-			IsItemClickEnabled="True"
-			helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
+		<SemanticZoom Grid.RowSpan="2">
+			<SemanticZoom.ZoomedInView>
+				<GridView
+					x:Name="itemGridView"
+					AutomationProperties.AutomationId="ItemGridView"
+					AutomationProperties.Name="Grouped Items"
+					Padding="116,137,40,46"
+					ItemsSource="{Binding Source={StaticResource feedsViewSource}}"
+					ItemTemplate="{StaticResource FeedItemTemplate}"
+					SelectionMode="None"
+					IsSwipeEnabled="false"
+					IsItemClickEnabled="True"
+					helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
 
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>                        
-                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-            <GridView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid Margin="1,0,0,6">
-                                <Button
-                                    AutomationProperties.Name="Group Title"
-                                    Style="{StaticResource TextPrimaryButtonStyle}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Title}" Margin="3,-7,10,10" Style="{StaticResource GroupHeaderTextStyle}" />
-                                        <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource GroupHeaderTextStyle}"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                    <GroupStyle.Panel>
-                        <ItemsPanelTemplate>
-                            <VariableSizedWrapGrid Orientation="Vertical" Margin="0,0,80,0"/>
-                        </ItemsPanelTemplate>
-                    </GroupStyle.Panel>
-                </GroupStyle>
-            </GridView.GroupStyle>
-        </GridView>
+					<GridView.ItemsPanel>
+						<ItemsPanelTemplate>
+							<VirtualizingStackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</GridView.ItemsPanel>
+					<GridView.GroupStyle>
+						<GroupStyle>
+							<GroupStyle.HeaderTemplate>
+								<DataTemplate>
+									<Grid Margin="1,0,0,6">
+										<Button
+											AutomationProperties.Name="Group Title"
+											Style="{StaticResource TextPrimaryButtonStyle}">
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="{Binding Title}" Margin="3,-7,10,10" Style="{StaticResource GroupHeaderTextStyle}" />
+												<TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource GroupHeaderTextStyle}"/>
+											</StackPanel>
+										</Button>
+									</Grid>
+								</DataTemplate>
+							</GroupStyle.HeaderTemplate>
+							<GroupStyle.Panel>
+								<ItemsPanelTemplate>
+									<VariableSizedWrapGrid Orientation="Vertical" Margin="0,0,80,0"/>
+								</ItemsPanelTemplate>
+							</GroupStyle.Panel>
+						</GroupStyle>
+					</GridView.GroupStyle>
+				</GridView>
+			</SemanticZoom.ZoomedInView>
+			<SemanticZoom.ZoomedOutView>
+				<GridView
+					AutomationProperties.AutomationId="ItemGridView"
+					AutomationProperties.Name="Grouped Items"
+					Padding="116,137,40,46"
+					ItemsSource="{Binding Path=CollectionGroups, Source={StaticResource feedsViewSource}}"
+					ItemTemplate="{StaticResource FeedItemZoomedOutTemplate}">
+
+					<GridView.ItemsPanel>
+						<ItemsPanelTemplate>
+							<VirtualizingStackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</GridView.ItemsPanel>
+				</GridView>
+			</SemanticZoom.ZoomedOutView>
+		</SemanticZoom>
 
         <!-- Vertical scrolling list only used when snapped -->
         <ListView
