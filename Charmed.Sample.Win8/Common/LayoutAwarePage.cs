@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Charmed.Sample.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -384,6 +385,11 @@ namespace Charmed.Sample.Win8.Common
         /// session.  This will be null the first time a page is visited.</param>
         protected virtual void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+			var viewModel = this.DataContext as SampleViewModelBase;
+			if (viewModel != null)
+			{
+				viewModel.LoadState(navigationParameter, pageState);
+			}
         }
 
         /// <summary>
@@ -394,6 +400,11 @@ namespace Charmed.Sample.Win8.Common
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected virtual void SaveState(Dictionary<String, Object> pageState)
         {
+			var viewModel = this.DataContext as SampleViewModelBase;
+			if (viewModel != null)
+			{
+				viewModel.SaveState(pageState);
+			}
         }
 
         #endregion

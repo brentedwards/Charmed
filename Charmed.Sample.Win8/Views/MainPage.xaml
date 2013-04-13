@@ -108,9 +108,11 @@
             Margin="0,-10,0,0"
             Padding="10,0,0,60"
             ItemsSource="{Binding Source={StaticResource feedsViewSource}}"
-            ItemTemplate="{StaticResource Standard80ItemTemplate}"
+            ItemTemplate="{StaticResource FeedItemSnappedViewTemplate}"
             SelectionMode="None"
-            IsSwipeEnabled="false">
+            IsSwipeEnabled="false"
+			IsItemClickEnabled="True"
+			helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
 
             <ListView.GroupStyle>
                 <GroupStyle>

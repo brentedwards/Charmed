@@ -1,19 +1,30 @@
 ﻿using Charmed.Sample.Models;
+using System.Collections.Generic;
 using System.Text;
 using Windows.ApplicationModel.DataTransfer;
 
 namespace Charmed.Sample.ViewModels
 {
-	public sealed class FeedItemViewModel : ViewModelBase
+	public sealed class FeedItemViewModel : SampleViewModelBase<FeedItem>
 	{
 		private readonly IShareManager shareManager;
 
 		public FeedItemViewModel(IShareManager shareManager)
 		{
 			this.shareManager = shareManager;
+		}
 
+		public override void LoadState(FeedItem navigationParameter, Dictionary<string, object> pageState)
+		{
 			this.shareManager.Initialize();
 			this.shareManager.OnShareRequested = ShareRequested;
+
+			this.FeedItem = navigationParameter;
+		}
+
+		public override void SaveState(Dictionary<string, object> pageState)
+		{
+			this.shareManager.Cleanup();
 		}
 
 		private void ShareRequested(DataPackage dataPackage)

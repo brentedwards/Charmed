@@ -17,37 +17,20 @@ namespace Charmed
 			this.container = container;
 		}
 
-		public void NavigateToViewModel<TViewModel>(object parameter = null, string parameterName = null)
+		public void NavigateToViewModel<TViewModel>(object parameter = null)
 		{
 			var viewType = ResolveViewType<TViewModel>();
 
 			var frame = (Frame)Window.Current.Content;
 
-			Windows.UI.Xaml.Navigation.NavigatedEventHandler onNavigated = (sender, args) =>
-				{
-					var page = args.Content as Page;
-					page.DataContext = this.container.Resolve<TViewModel>();
-
-					if (args.Parameter != null)
-					{
-						var json = args.Parameter.ToString();
-
-						var viewModelType = typeof(TViewModel);
-						var navProperty = viewModelType.GetTypeInfo().GetDeclaredProperty(parameterName ?? "NavigationParameter");
-
-						if (navProperty != null)
-						{
-							var navPropertyType = navProperty.PropertyType;
-
-							var navParam = this.serializer.Deserialize(navPropertyType, json);
-							navProperty.SetValue(page.DataContext, navParam);
-						}
-					}
-				};
-
-			frame.Navigated += onNavigated;
-			frame.Navigate(viewType, this.serializer.Serialize(parameter));
-			frame.Navigated -= onNavigated;
+			if (parameter != null)
+			{
+				frame.Navigate(viewType, this.serializer.Serialize(parameter));
+			}
+			else
+			{
+				frame.Navigate(viewType);
+			}
 		}
 
 		public void GoBack()
