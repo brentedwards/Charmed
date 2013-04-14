@@ -112,7 +112,10 @@
     <Compile Include="Mocks\MockHelper.cs" />
     <Compile Include="Mocks\NavigatorMock.cs" />
     <Compile Include="Mocks\RssFeedServiceMock.cs" />
+    <Compile Include="Mocks\SerializerMock.cs" />
+    <Compile Include="Mocks\ShareManagerMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FeedItemViewModelTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
