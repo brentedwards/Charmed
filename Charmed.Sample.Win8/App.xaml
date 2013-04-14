@@ -20,7 +20,7 @@
 
             <!-- Application-specific resources -->
 
-            <x:String x:Key="AppName">Charmed RSS Reader</x:String>
+            <x:String x:Key="AppName">Charmed Reader</x:String>
 			
 			<vm:ViewModelLocator x:Name="Locator" />
         </ResourceDictionary>

@@ -5,11 +5,14 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace Charmed.Sample.ViewModels
 {
-	public sealed class FeedItemViewModel : SampleViewModelBase<FeedItem>
+	public sealed class FeedItemViewModel : ViewModelBase<FeedItem>
 	{
 		private readonly IShareManager shareManager;
 
-		public FeedItemViewModel(IShareManager shareManager)
+		public FeedItemViewModel(
+			IShareManager shareManager,
+			ISerializer serializer)
+			: base(serializer)
 		{
 			this.shareManager = shareManager;
 		}

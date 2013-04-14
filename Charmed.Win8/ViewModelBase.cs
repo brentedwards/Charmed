@@ -14,6 +14,23 @@ namespace Charmed
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		/// <summary>
+		/// Loads state when the view model is loaded.
+		/// </summary>
+		/// <param name="navigationParameter">The navigation parameter.</param>
+		/// <param name="pageState">The state to load.</param>
+		public virtual void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
+		{
+		}
+
+		/// <summary>
+		/// Saves state when the view model is unloaded.
+		/// </summary>
+		/// <param name="pageState">The state to save to.</param>
+		public virtual void SaveState(Dictionary<String, Object> pageState)
+		{
+		}
+
+		/// <summary>
 		/// Notifies that a property has changed.
 		/// </summary>
 		/// <param name="propertyName">The name of the property that changed.</param>
@@ -52,6 +69,38 @@ namespace Charmed
 		{
 			get { return this.isBusy; }
 			set { this.SetProperty(ref this.isBusy, value); }
+		}
+	}
+
+	/// <summary>
+	/// View model base class that provides strongly typed navigation parameters
+	/// </summary>
+	/// <typeparam name="TParameter"></typeparam>
+	public abstract class ViewModelBase<TParameter> : ViewModelBase
+	{
+		private readonly ISerializer serializer;
+
+		public ViewModelBase(ISerializer serializer)
+		{
+			this.serializer = serializer;
+		}
+
+		/// <summary>
+		/// Loads state when the view model is loaded, with a strongly-typed parameter.
+		/// </summary>
+		/// <param name="navigationParameter">The navigation parameter.</param>
+		/// <param name="pageState">The state to load.</param>
+		public abstract void LoadState(TParameter navigationParameter, Dictionary<String, Object> pageState);
+
+		/// <summary>
+		/// Loads state when the view model is loaded.
+		/// </summary>
+		/// <param name="navigationParameter">The navigation parameter.</param>
+		/// <param name="pageState">The state to load.</param>
+		public override void LoadState(object navigationParameter, Dictionary<string, object> pageState)
+		{
+			var deserializedNavigationParameter = this.serializer.Deserialize<TParameter>(navigationParameter.ToString());
+			this.LoadState(deserializedNavigationParameter, pageState);
 		}
 	}
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Charmed.Sample.ViewModels
 {
-	public sealed class MainViewModel : SampleViewModelBase
+	public sealed class MainViewModel : ViewModelBase
 	{
 		private readonly IRssFeedService rssFeedService;
 		private readonly INavigator navigator;

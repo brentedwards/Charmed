@@ -120,7 +120,6 @@
     <Compile Include="Services\RssFeedService.cs" />
     <Compile Include="ViewModels\FeedItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\SampleViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\FeedItemPage.xaml.cs">
       <DependentUpon>FeedItemPage.xaml</DependentUpon>
