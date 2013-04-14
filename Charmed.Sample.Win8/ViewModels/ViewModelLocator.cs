@@ -1,4 +1,5 @@
 ﻿using Charmed.Container;
+using Charmed.Helpers;
 using Charmed.Sample.Services;
 
 namespace Charmed.Sample.ViewModels
