@@ -8,10 +8,10 @@ namespace Charmed
 {
 	public sealed class Settings : ISettings
 	{
-		public void Add(string key, object value)
+		public void AddOrUpdate(string key, object value)
 		{
 #if WINDOWS_PHONE
-			IsolatedStorageSettings.ApplicationSettings.Add(key, value);
+			IsolatedStorageSettings.ApplicationSettings[key] = value;
 			IsolatedStorageSettings.ApplicationSettings.Save();
 #else
 			ApplicationData.Current.RoamingSettings.Values[key] = value;

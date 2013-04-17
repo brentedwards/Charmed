@@ -7,11 +7,11 @@ namespace Charmed
 	public interface ISettings
 	{
 		/// <summary>
-		/// Adds setting data.
+		/// Adds or updates setting data.
 		/// </summary>
 		/// <param name="key">The key for the data.</param>
 		/// <param name="value">The data.</param>
-		void Add(string key, object value);
+		void AddOrUpdate(string key, object value);
 
 		/// <summary>
 		/// Tries to get setting data.
