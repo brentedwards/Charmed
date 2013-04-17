@@ -126,6 +126,9 @@
     <Compile Include="Helpers\ListViewHelper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondaryPinner.cs">
@@ -137,6 +140,9 @@
     </Compile>
     <Compile Include="ShareManager.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
+    <Compile Include="Storage.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TileInfo.cs">
       <SubType>Code</SubType>
     </Compile>
