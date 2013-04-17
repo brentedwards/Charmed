@@ -110,6 +110,7 @@
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\InverseBoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="Helpers\ButtonHelper.cs" />
     <Compile Include="Helpers\WebViewHelper.cs" />
     <Compile Include="INavigator.cs" />
     <Compile Include="Container\IContainer.cs" />
