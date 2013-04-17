@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Charmed.Helpers
 {
-	public sealed class WebViewHelper : DependencyObject
+	/// <summary>
+	/// Helper class to assist with making Html content bindable on a WebView.
+	/// </summary>
+	public sealed class WebViewHelper
 	{
 		public static readonly DependencyProperty HtmlContentProperty =
 			DependencyProperty.RegisterAttached(

@@ -7,7 +7,7 @@ namespace Charmed.Helpers
 	/// <summary>
 	/// Helper class for routing a ListView's ItemClicks to a method on the view model.
 	/// </summary>
-	public class ListViewHelper : DependencyObject
+	public sealed class ListViewHelper
 	{
 		public static readonly DependencyProperty ItemClickMethodNameProperty =
 			DependencyProperty.RegisterAttached(

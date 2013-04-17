@@ -6,7 +6,7 @@ namespace Charmed.Helpers
 	/// <summary>
 	/// Helper class to assist with binding text to a view model as soon as it changes.
 	/// </summary>
-	public class TextBoxHelper
+	public sealed class TextBoxHelper
 	{
 		public static readonly DependencyProperty BindableTextProperty =
 			DependencyProperty.RegisterAttached(
