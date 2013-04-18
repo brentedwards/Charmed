@@ -13,7 +13,7 @@ namespace Charmed
 		/// <typeparam name="T">The type of data to load.</typeparam>
 		/// <param name="fileName">The name of the file to load data from.</param>
 		/// <returns>Returns the loaded data or null if the file was not found.</returns>
-		Task<T> Load<T>(string fileName);
+		Task<T> LoadAsync<T>(string fileName);
 
 		/// <summary>
 		/// Saves data to local storage with the given file name.
@@ -21,6 +21,6 @@ namespace Charmed
 		/// <param name="fileName">The name fo the file to save data to.</param>
 		/// <param name="data">The data to save.</param>
 		/// <returns></returns>
-		Task Save(string fileName, object data);
+		Task SaveAsync(string fileName, object data);
 	}
 }

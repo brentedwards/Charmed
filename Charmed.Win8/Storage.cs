@@ -13,7 +13,7 @@ namespace Charmed
 			this.serializer = serializer;
 		}
 
-		public async Task<T> Load<T>(string fileName)
+		public async Task<T> LoadAsync<T>(string fileName)
 		{
 			var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 
@@ -28,7 +28,7 @@ namespace Charmed
 			return data;
 		}
 
-		public async Task Save(string fileName, object data)
+		public async Task SaveAsync(string fileName, object data)
 		{
 			var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 
