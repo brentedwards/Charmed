@@ -7,11 +7,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:helpers="using:Charmed.Helpers"
+	xmlns:converters="using:Charmed.Converters"
     mc:Ignorable="d"
 	DataContext="{Binding Source={StaticResource Locator}, Path=FeedItem}">
 
     <Page.Resources>
-
+		<converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+		<converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
     </Page.Resources>
 
     <!--
@@ -43,6 +45,8 @@
 			<TextBlock Text="{Binding FeedItem.Author}" Style="{StaticResource SubheaderTextStyle}" />
 			<WebView
 				helpers:WebViewHelper.HtmlContent="{Binding FeedItem.Content}"
+				IsRightTapEnabled="False"
+				Margin="0,0,0,110"
 				Grid.Row="1" />
 		</Grid>
 
@@ -76,4 +80,22 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
+	<Page.BottomAppBar>
+		<AppBar Padding="10,0,10,0">
+			<Grid>
+				<Button
+					Style="{StaticResource PinAppBarButtonStyle}"
+					AutomationProperties.Name="Pin to Start"
+					Visibility="{Binding IsFeedItemPinned, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+					helpers:ButtonHelper.MethodName="Pin"
+					helpers:ButtonHelper.Parameter="{Binding FeedItem}"/>
+
+				<Button
+					Style="{StaticResource UnPinAppBarButtonStyle}"
+					AutomationProperties.Name="Unpin from Start"
+					Visibility="{Binding IsFeedItemPinned, Converter={StaticResource BoolToVisibilityConverter}}"
+					helpers:ButtonHelper.MethodName="Unpin"/>
+			</Grid>
+		</AppBar>
+	</Page.BottomAppBar>
 </common:LayoutAwarePage>

@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Charmed.Sample.Win8.Tests.ViewModels
 {
@@ -17,10 +20,12 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 	{
 		private ShareManagerMock ShareManager { get; set; }
 		private SerializerMock Serializer { get; set; }
+		private SecondaryPinnerMock SecondaryPinner { get; set; }
+		private StorageMock Storage { get; set; }
 
 		private FeedItemViewModel GetViewModel()
 		{
-			return new FeedItemViewModel(this.ShareManager, this.Serializer);
+			return new FeedItemViewModel(this.ShareManager, this.Serializer, this.SecondaryPinner, this.Storage);
 		}
 
 		private List<string> PropertiesChanged { get; set; }
@@ -34,6 +39,8 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 		{
 			this.ShareManager = new ShareManagerMock();
 			this.Serializer = new SerializerMock();
+			this.SecondaryPinner = new SecondaryPinnerMock();
+			this.Storage = new StorageMock();
 
 			this.PropertiesChanged = new List<string>();
 		}
@@ -124,6 +131,95 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 			Assert.IsFalse(string.IsNullOrEmpty(await dataPackageView.GetTextAsync()), "Text Exists");
 			Assert.AreEqual(feedItem.Link.ToString(), (await dataPackageView.GetUriAsync()).ToString(), "Uri");
 			Assert.IsTrue(!string.IsNullOrEmpty(await dataPackageView.GetHtmlFormatAsync()), "HTML Exists");
+		}
+
+		[TestMethod]
+		public async Task Pin_PinSucceeded()
+		{
+			// Arrange
+			var viewModel = GetViewModel();
+
+			var feedItem = new FeedItem
+			{
+				Title = Guid.NewGuid().ToString(),
+				Author = Guid.NewGuid().ToString(),
+				Link = new Uri("http://www.bing.com")
+			};
+
+			viewModel.LoadState(feedItem, null);
+
+			Placement actualPlacement = Placement.Default;
+			TileInfo actualTileInfo = null;
+			SecondaryPinner.PinDelegate = (anchorElement, requestPlacement, tileInfo) =>
+				{
+					actualPlacement = requestPlacement;
+					actualTileInfo = tileInfo;
+
+					return true;
+				};
+
+			string actualKey = null;
+			List<FeedItem> actualPinnedFeedItems = null;
+			Storage.SaveAsyncDelegate = (key, value) =>
+				{
+					actualKey = key;
+					actualPinnedFeedItems = (List<FeedItem>)value;
+				};
+
+			// Act
+			await viewModel.Pin(null);
+
+			// Assert
+			Assert.AreEqual(Placement.Above, actualPlacement, "Placement");
+			Assert.AreEqual(string.Format(Constants.SecondaryIdFormat, viewModel.FeedItem.Id), actualTileInfo.TileId, "Tile Info Tile Id");
+			Assert.AreEqual(viewModel.FeedItem.Title, actualTileInfo.DisplayName, "Tile Info Display Name");
+			Assert.AreEqual(viewModel.FeedItem.Title, actualTileInfo.ShortName, "Tile Info Short Name");
+			Assert.AreEqual(viewModel.FeedItem.Id.ToString(), actualTileInfo.Arguments, "Tile Info Arguments");
+			Assert.AreEqual(Constants.PinnedFeedItemsKey, actualKey, "Save Key");
+			Assert.IsNotNull(actualPinnedFeedItems, "Pinned Feed Items");
+		}
+
+		[TestMethod]
+		public async Task Pin_PinNotSucceeded()
+		{
+			// Arrange
+			var viewModel = GetViewModel();
+
+			var feedItem = new FeedItem
+			{
+				Title = Guid.NewGuid().ToString(),
+				Author = Guid.NewGuid().ToString(),
+				Link = new Uri("http://www.bing.com")
+			};
+
+			viewModel.LoadState(feedItem, null);
+
+			Placement actualPlacement = Placement.Default;
+			TileInfo actualTileInfo = null;
+			SecondaryPinner.PinDelegate = (anchorElement, requestPlacement, tileInfo) =>
+			{
+				actualPlacement = requestPlacement;
+				actualTileInfo = tileInfo;
+
+				return false;
+			};
+
+			var wasSaveCalled = false;
+			Storage.SaveAsyncDelegate = (key, value) =>
+			{
+				wasSaveCalled = true;
+			};
+
+			// Act
+			await viewModel.Pin(null);
+
+			// Assert
+			Assert.AreEqual(Placement.Above, actualPlacement, "Placement");
+			Assert.AreEqual(string.Format(Constants.SecondaryIdFormat, viewModel.FeedItem.Id), actualTileInfo.TileId, "Tile Info Tile Id");
+			Assert.AreEqual(viewModel.FeedItem.Title, actualTileInfo.DisplayName, "Tile Info Display Name");
+			Assert.AreEqual(viewModel.FeedItem.Title, actualTileInfo.ShortName, "Tile Info Short Name");
+			Assert.AreEqual(viewModel.FeedItem.Id.ToString(), actualTileInfo.Arguments, "Tile Info Arguments");
+			Assert.IsFalse(wasSaveCalled, "Was Save Called");
 		}
 	}
 }

@@ -733,13 +733,13 @@
         <Setter Property="AutomationProperties.AutomationId" Value="RenameAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Rename"/>
         <Setter Property="Content" Value="&#xE13E;"/>
-    </Style>
+    </Style>-->
     <Style x:Key="PinAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="PinAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Pin"/>
         <Setter Property="Content" Value="&#xE141;"/>
     </Style>
-    <Style x:Key="MusicInfoAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
+    <!--<Style x:Key="MusicInfoAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="MusicInfoAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Music Info"/>
         <Setter Property="Content" Value="&#xE142;"/>
@@ -1109,13 +1109,13 @@
         <Setter Property="AutomationProperties.AutomationId" Value="UnfavoriteAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Unfavorite"/>
         <Setter Property="Content" Value="&#xE195;"/>
-    </Style>
+    </Style>-->
     <Style x:Key="UnPinAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="UnPinAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Unpin"/>
         <Setter Property="Content" Value="&#xE196;"/>
     </Style>
-    <Style x:Key="OpenLocalAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
+    <!--<Style x:Key="OpenLocalAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="OpenLocalAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Open Loal"/>
         <Setter Property="Content" Value="&#xE197;"/>

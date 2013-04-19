@@ -110,6 +110,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\FeedData.cs" />
     <Compile Include="Models\FeedItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

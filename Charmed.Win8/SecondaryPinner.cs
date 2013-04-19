@@ -34,8 +34,12 @@ namespace Charmed
 					tileInfo.DisplayName,
 					tileInfo.Arguments,
 					tileInfo.TileOptions,
-					tileInfo.LogoUri,
-					tileInfo.WideLogoUri);
+					tileInfo.LogoUri);
+
+				if (tileInfo.WideLogoUri != null)
+				{
+					secondaryTile.WideLogo = tileInfo.WideLogoUri;
+				}
 
 				isPinned = await secondaryTile.RequestCreateForSelectionAsync(
 						GetElementRect(anchorElement), requestPlacement);

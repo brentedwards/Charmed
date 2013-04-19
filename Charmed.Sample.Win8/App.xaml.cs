@@ -1,4 +1,5 @@
 ﻿using Charmed.Container;
+using Charmed.Sample.Models;
 using Charmed.Sample.Services;
 using Charmed.Sample.ViewModels;
 using Charmed.Sample.Views;
@@ -82,6 +83,25 @@ namespace Charmed.Sample.Win8
                 // parameter
 				Ioc.Container.Resolve<INavigator>().NavigateToViewModel<MainViewModel>();
             }
+
+			if (!string.IsNullOrWhiteSpace(args.Arguments))
+			{
+				var storage = Ioc.Container.Resolve<IStorage>();
+				List<FeedItem> pinnedFeedItems = await storage.LoadAsync<List<FeedItem>>(Constants.PinnedFeedItemsKey);
+				if (pinnedFeedItems != null)
+				{
+					int id;
+					if (int.TryParse(args.Arguments, out id))
+					{
+						var pinnedFeedItem = pinnedFeedItems.FirstOrDefault(fi => fi.Id == id);
+						if (pinnedFeedItem != null)
+						{
+							Ioc.Container.Resolve<INavigator>().NavigateToViewModel<FeedItemViewModel>(pinnedFeedItem);
+						}
+					}
+				}
+			}
+
             // Ensure the current window is active
             Window.Current.Activate();
         }
