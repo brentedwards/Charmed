@@ -1,6 +1,7 @@
 ﻿using Charmed.Sample.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Web.Syndication;
 
@@ -97,6 +98,8 @@ namespace Charmed.Sample.Services
 								feedItem.Link = item.Links[0].Uri;
 							}
 						}
+
+						feedItem.Id = Regex.Replace(feedItem.Link.ToString(), @"[^0-9a-zA-Z\.]+", string.Empty).GetHashCode();
 
 						feedData.Items.Add(feedItem);
 					}
