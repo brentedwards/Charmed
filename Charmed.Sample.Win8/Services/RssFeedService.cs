@@ -16,17 +16,16 @@ namespace Charmed.Sample.Services
 	/// </remarks>
 	public sealed class RssFeedService : IRssFeedService
 	{
-		private readonly string[] Feeds = new string[]
+		private List<string> Feeds { get; set; }
+
+		public RssFeedService(ISettings settings)
 		{
-			"http://blogs.windows.com/windows/b/windowsexperience/atom.aspx",
-			"http://blogs.windows.com/windows/b/extremewindows/atom.aspx",
-			"http://blogs.windows.com/windows/b/bloggingwindows/atom.aspx",
-			"http://blogs.windows.com/windows_live/b/windowslive/rss.aspx",
-			"http://blogs.windows.com/windows_live/b/developer/atom.aspx",
-			"http://blogs.windows.com/windows_phone/b/wpdev/atom.aspx",
-			"http://blogs.windows.com/windows_phone/b/wmdev/atom.aspx",
-			"http://blogs.windows.com/windows_phone/b/windowsphone/atom.aspx"
-		};
+			string[] feeds;
+			if (settings.TryGetValue<string[]>(Constants.FeedsKey, out feeds))
+			{
+				this.Feeds = new List<string>(feeds);
+			}
+		}
 
 		public async Task<List<FeedData>> GetFeedsAsync()
 		{

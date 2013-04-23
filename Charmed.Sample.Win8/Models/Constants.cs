@@ -11,5 +11,7 @@ namespace Charmed.Sample.Models
 		public const string PinnedFeedItemsKey = "PinnedFeedItems.json";
 
 		public const string SecondaryIdFormat = "Charmed.Sample.{0}";
+
+		public const string FeedsKey = "Feeds";
 	}
 }

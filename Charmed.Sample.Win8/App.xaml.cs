@@ -12,6 +12,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -54,6 +55,24 @@ namespace Charmed.Sample.Win8
             
             if (rootFrame == null)
             {
+				if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.FeedsKey))
+				{
+					// Seed the app with default feeds.
+					var feeds = new string[]
+					{
+						"http://blogs.windows.com/windows/b/windowsexperience/atom.aspx",
+						"http://blogs.windows.com/windows/b/extremewindows/atom.aspx",
+						"http://blogs.windows.com/windows/b/bloggingwindows/atom.aspx",
+						"http://blogs.windows.com/windows_live/b/windowslive/rss.aspx",
+						"http://blogs.windows.com/windows_live/b/developer/atom.aspx",
+						"http://blogs.windows.com/windows_phone/b/wpdev/atom.aspx",
+						"http://blogs.windows.com/windows_phone/b/wmdev/atom.aspx",
+						"http://blogs.windows.com/windows_phone/b/windowsphone/atom.aspx"
+					};
+
+					ApplicationData.Current.RoamingSettings.Values[Constants.FeedsKey] = feeds;
+				}
+
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
                 //Associate the frame with a SuspensionManager key                                
