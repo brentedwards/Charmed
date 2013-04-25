@@ -45,12 +45,36 @@ namespace Charmed.Helpers
 					}
 				})));
 
+		public static readonly DependencyProperty MethodContextProperty =
+			DependencyProperty.RegisterAttached(
+				"MethodContext",
+				typeof(object),
+				typeof(ButtonHelper),
+				new PropertyMetadata(null, new PropertyChangedCallback((sender, args) =>
+				{
+					var button = sender as Button;
+					if (button != null)
+					{
+						if (!(button.Tag is ButtonHelper))
+						{
+							button.Tag = new ButtonHelper(button);
+						}
+					}
+				})));
+
 		public ButtonHelper(Button button)
 		{
 			button.Click += (o, a) =>
 			{
 				var methodName = GetMethodName(button);
-				var method = button.DataContext.GetType().GetTypeInfo().GetDeclaredMethod(methodName);
+
+				var dataContext = GetMethodContext(button);
+				if (dataContext == null)
+				{
+					dataContext = button.DataContext;
+				}
+
+				var method = dataContext.GetType().GetTypeInfo().GetDeclaredMethod(methodName);
 				var parms = method.GetParameters();
 
 				object[] parameters = null;
@@ -76,7 +100,7 @@ namespace Charmed.Helpers
 					}
 				}
 
-				method.Invoke(button.DataContext, parameters);
+				method.Invoke(dataContext, parameters);
 			};
 		}
 
@@ -96,6 +120,15 @@ namespace Charmed.Helpers
 		public static object GetParameter(Button element)
 		{
 			return element.GetValue(ParameterProperty);
+		}
+
+		public static void SetMethodContext(Button element, object value)
+		{
+			element.SetValue(MethodContextProperty, value);
+		}
+		public static object GetMethodContext(Button element)
+		{
+			return element.GetValue(MethodContextProperty);
 		}
 	}
 }
