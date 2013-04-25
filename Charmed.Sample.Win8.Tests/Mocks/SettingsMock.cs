@@ -13,11 +13,12 @@ namespace Charmed.Sample.Tests.Mocks
 			}
 		}
 
-		public Func<string, object, bool> TryGetValueDelegate { get; set; }
+		public Func<string, object, object> TryGetValueDelegate { get; set; }
 		public bool TryGetValue<T>(string key, out T value)
 		{
 			value = default(T);
-			return MockHelper.ExecuteDelegate<string, object, bool>(this.TryGetValueDelegate, key, value);
+			value = (T)MockHelper.ExecuteDelegate<string, object, object>(this.TryGetValueDelegate, key, value);
+			return !object.Equals(value, default(T));
 		}
 
 		public Func<string, bool> RemoveDelegate { get; set; }

@@ -1,4 +1,6 @@
-﻿using Charmed.Sample.Models;
+﻿using Charmed.Messaging;
+using Charmed.Sample.Messages;
+using Charmed.Sample.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -7,10 +9,14 @@ namespace Charmed.Sample.ViewModels
 	public sealed class SettingsViewModel : ViewModelBase
 	{
 		private readonly ISettings settings;
+		private readonly IMessageBus messageBus;
 
-		public SettingsViewModel(ISettings settings)
+		public SettingsViewModel(
+			ISettings settings,
+			IMessageBus messageBus)
 		{
 			this.settings = settings;
+			this.messageBus = messageBus;
 
 			this.Feeds = new ObservableCollection<string>();
 
@@ -42,6 +48,8 @@ namespace Charmed.Sample.ViewModels
 		private void SaveFeeds()
 		{
 			this.settings.AddOrUpdate(Constants.FeedsKey, this.Feeds.ToArray());
+
+			this.messageBus.Publish<FeedsChangedMessage>(new FeedsChangedMessage());
 		}
 
 		public ObservableCollection<string> Feeds { get; private set; }

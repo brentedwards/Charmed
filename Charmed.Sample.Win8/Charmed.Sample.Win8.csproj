@@ -112,6 +112,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Messages\FeedsChangedMessage.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\FeedData.cs" />
     <Compile Include="Models\FeedItem.cs" />

@@ -1,4 +1,5 @@
-﻿using Charmed.Sample.Models;
+﻿using Charmed.Sample.Messages;
+using Charmed.Sample.Models;
 using Charmed.Sample.Tests.Mocks;
 using Charmed.Sample.ViewModels;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
@@ -12,10 +13,11 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 	{
 		private RssFeedServiceMock RssFeedService { get; set; }
 		private NavigatorMock Navigator { get; set; }
+		private MessageBusMock MessageBus { get; set; }
 
 		private MainViewModel GetViewModel()
 		{
-			return new MainViewModel(this.RssFeedService, this.Navigator);
+			return new MainViewModel(this.RssFeedService, this.Navigator, this.MessageBus);
 		}
 
 		[TestInitialize]
@@ -23,6 +25,7 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 		{
 			this.RssFeedService = new RssFeedServiceMock();
 			this.Navigator = new NavigatorMock();
+			this.MessageBus = new MessageBusMock();
 		}
 
 		[TestMethod]
@@ -67,6 +70,32 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 
 			// Assert
 			Assert.AreSame(expectedFeedData, actualFeedData);
+		}
+
+		[TestMethod]
+		public void HandleFeedsChangedMessage()
+		{
+			// Arrange
+			Action<FeedsChangedMessage> handler = null;
+			this.MessageBus.SubscribeDelegate = (h) =>
+				{
+					handler = (Action<FeedsChangedMessage>)h;
+				};
+
+			var viewModel = GetViewModel();
+
+			var expectedFeedData = new List<FeedData>();
+
+			this.RssFeedService.GetFeedsAsyncDelegate = () =>
+			{
+				return expectedFeedData;
+			};
+
+			// Act
+			handler(new FeedsChangedMessage());
+
+			// Assert
+			Assert.AreSame(expectedFeedData, viewModel.FeedData);
 		}
 	}
 }

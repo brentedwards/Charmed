@@ -1,5 +1,6 @@
 ﻿using Charmed.Container;
 using Charmed.Helpers;
+using Charmed.Messaging;
 using Charmed.Sample.Services;
 
 namespace Charmed.Sample.ViewModels
@@ -18,6 +19,7 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<ISettings, Settings>();
 			Ioc.Container.Register<IStorage, Storage>();
 			Ioc.Container.Register<SettingsViewModel>();
+			Ioc.Container.RegisterInstance<IMessageBus>(new MessageBus());
 			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
 		}
 
@@ -29,6 +31,11 @@ namespace Charmed.Sample.ViewModels
 		public FeedItemViewModel FeedItem
 		{
 			get { return Ioc.Container.Resolve<FeedItemViewModel>(); }
+		}
+
+		public SettingsViewModel Settings
+		{
+			get { return Ioc.Container.Resolve<SettingsViewModel>(); }
 		}
 
 		public static bool IsInDesignMode
