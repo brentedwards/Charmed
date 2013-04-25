@@ -1,9 +1,11 @@
-﻿using Charmed.Container;
+﻿using Callisto.Controls;
+using Charmed.Container;
 using Charmed.Sample.Models;
 using Charmed.Sample.Services;
 using Charmed.Sample.ViewModels;
 using Charmed.Sample.Views;
 using Charmed.Sample.Win8.Common;
+using Charmed.Sample.Win8.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +15,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -55,6 +59,8 @@ namespace Charmed.Sample.Win8
             
             if (rootFrame == null)
             {
+				SettingsPane.GetForCurrentView().CommandsRequested += App_CommandsRequested;
+
 				if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.FeedsKey))
 				{
 					// Seed the app with default feeds.
@@ -134,9 +140,32 @@ namespace Charmed.Sample.Win8
         /// <param name="e">Details about the suspend request.</param>
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
+			SettingsPane.GetForCurrentView().CommandsRequested -= App_CommandsRequested;
+
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
+
+		private void App_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+		{
+			SettingsCommand settingsCommand = new SettingsCommand("SettingNW", "Feeds", (x) =>
+			{
+				SettingsFlyout settings = new SettingsFlyout();
+				settings.FlyoutWidth = Callisto.Controls.SettingsFlyout.SettingsFlyoutWidth.Wide;
+				settings.HeaderText = "Feeds";
+
+				var viewModel = Ioc.Container.Resolve<SettingsViewModel>();
+				var view = new SettingsView
+				{
+					DataContext = viewModel
+				};
+				settings.Content = view;
+				settings.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+				settings.VerticalContentAlignment = VerticalAlignment.Stretch;
+				settings.IsOpen = true;
+			});
+			args.Request.ApplicationCommands.Add(settingsCommand);
+		}
     }
 }

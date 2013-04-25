@@ -16,24 +16,35 @@ namespace Charmed.Sample.Services
 	/// </remarks>
 	public sealed class RssFeedService : IRssFeedService
 	{
-		private List<string> Feeds { get; set; }
+		private readonly ISettings settings;
 
 		public RssFeedService(ISettings settings)
 		{
-			string[] feeds;
-			if (settings.TryGetValue<string[]>(Constants.FeedsKey, out feeds))
-			{
-				this.Feeds = new List<string>(feeds);
-			}
+			this.settings = settings;
 		}
 
 		public async Task<List<FeedData>> GetFeedsAsync()
 		{
+			List<string> feeds = null;
+			string[] feedData;
+			if (settings.TryGetValue<string[]>(Constants.FeedsKey, out feedData))
+			{
+				feeds = new List<string>(feedData);
+			}
+			else
+			{
+				throw new ArgumentException("There are no feeds");
+			}
+
 			var feedsData = new List<FeedData>();
 
-			foreach (var feed in this.Feeds)
+			foreach (var feed in feeds)
 			{
-				feedsData.Add(await GetFeedAsync(feed));
+				var data = await GetFeedAsync(feed);
+				if (data != null)
+				{
+					feedsData.Add(data);
+				}
 			}
 
 			return feedsData;
@@ -42,7 +53,11 @@ namespace Charmed.Sample.Services
 		private async Task<FeedData> GetFeedAsync(string feedUriString)
 		{
 			var client = new SyndicationClient();
-			var feedUri = new Uri(feedUriString);
+			Uri feedUri;
+			if (!Uri.TryCreate(feedUriString, UriKind.RelativeOrAbsolute, out feedUri))
+			{
+				return null;
+			}
 
 			try
 			{

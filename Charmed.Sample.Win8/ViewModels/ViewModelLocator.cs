@@ -17,6 +17,7 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
 			Ioc.Container.Register<ISettings, Settings>();
 			Ioc.Container.Register<IStorage, Storage>();
+			Ioc.Container.Register<SettingsViewModel>();
 			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
 		}
 
