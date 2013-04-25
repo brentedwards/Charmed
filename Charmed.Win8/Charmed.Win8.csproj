@@ -129,6 +129,9 @@
     <Compile Include="IStorage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Messaging\ActionReference.cs" />
+    <Compile Include="Messaging\IMessageBus.cs" />
+    <Compile Include="Messaging\MessageBus.cs" />
     <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondaryPinner.cs">
