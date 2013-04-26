@@ -13,6 +13,7 @@ namespace Charmed.Converters
 	/// </summary>
 	public sealed class DateTimeToStringConverter : IValueConverter
 	{
+		public string Format { get; set; }
 		public bool IsDateTimeNullable { get; set; }
 
 #if WINDOWS_PHONE
@@ -24,7 +25,7 @@ namespace Charmed.Converters
 			var result = string.Empty;
 			if (value is DateTime)
 			{
-				result = ((DateTime)value).ToString("d");
+				result = ((DateTime)value).ToString(this.Format ?? "d");
 			}
 
 			return result;
@@ -36,13 +37,8 @@ namespace Charmed.Converters
 		public object ConvertBack(object value, Type targetType, object parameter, string language)
 #endif // WINDOWS_PHONE
 		{
-			if (value == null)
-			{
-				throw new ArgumentNullException("value");
-			}
-
 			DateTime date;
-			if (DateTime.TryParse(value.ToString(), out date))
+			if (value != null && DateTime.TryParse(value.ToString(), out date))
 			{
 				return date;
 			}

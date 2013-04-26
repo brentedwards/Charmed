@@ -112,6 +112,9 @@
     <Compile Include="Converters\BoolToVisibilityConverterTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\DateTimeToStringConverterTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
