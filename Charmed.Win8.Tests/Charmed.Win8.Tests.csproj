@@ -121,6 +121,9 @@
     <Compile Include="Converters\InverseBoolToVisibilityConverterTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\ButtonHelperTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +153,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Messaging\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
