@@ -118,6 +118,9 @@
     <Compile Include="Converters\InverseBoolConverterTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\InverseBoolToVisibilityConverterTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
