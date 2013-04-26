@@ -124,6 +124,7 @@
     <Compile Include="Helpers\ButtonHelperTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\TextBoxHelperTests.cs" />
     <Compile Include="Messaging\MessageBusTests.cs">
       <SubType>Code</SubType>
     </Compile>
