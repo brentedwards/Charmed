@@ -10,15 +10,15 @@ namespace Charmed
 		public void Initialize()
 		{
 			this.DataTransferManager = DataTransferManager.GetForCurrentView();
-			this.DataTransferManager.DataRequested += this.dataTransferManager_DataRequested;
+			this.DataTransferManager.DataRequested += this.DataTransferManager_DataRequested;
 		}
 
 		public void Cleanup()
 		{
-			this.DataTransferManager.DataRequested -= this.dataTransferManager_DataRequested;
+			this.DataTransferManager.DataRequested -= this.DataTransferManager_DataRequested;
 		}
 
-		private void dataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+		private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
 		{
 			if (this.OnShareRequested != null)
 			{
