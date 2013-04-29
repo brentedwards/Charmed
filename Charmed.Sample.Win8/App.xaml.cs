@@ -1,29 +1,17 @@
 ﻿using Callisto.Controls;
 using Charmed.Container;
 using Charmed.Sample.Models;
-using Charmed.Sample.Services;
 using Charmed.Sample.ViewModels;
-using Charmed.Sample.Views;
 using Charmed.Sample.Win8.Common;
 using Charmed.Sample.Win8.Views;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
-using Windows.UI;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Grid App template is documented at http://go.microsoft.com/fwlink/?LinkId=234226
 
@@ -34,6 +22,8 @@ namespace Charmed.Sample.Win8
     /// </summary>
     sealed partial class App : Application
     {
+		private ISettingsManager SettingsManager { get; set; }
+
         /// <summary>
         /// Initializes the singleton Application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -59,7 +49,9 @@ namespace Charmed.Sample.Win8
             
             if (rootFrame == null)
             {
-				SettingsPane.GetForCurrentView().CommandsRequested += App_CommandsRequested;
+				this.SettingsManager = Ioc.Container.Resolve<ISettingsManager>();
+				this.SettingsManager.Initialize();
+				this.SettingsManager.OnSettingsRequested = OnSettingsRequested;
 
 				if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.FeedsKey))
 				{
@@ -140,14 +132,14 @@ namespace Charmed.Sample.Win8
         /// <param name="e">Details about the suspend request.</param>
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
-			SettingsPane.GetForCurrentView().CommandsRequested -= App_CommandsRequested;
+			this.SettingsManager.Cleanup();
 
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
 
-		private void App_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+		private void OnSettingsRequested(IList<SettingsCommand> commands)
 		{
 			SettingsCommand settingsCommand = new SettingsCommand("SettingNW", "Feeds", (x) =>
 			{
@@ -155,17 +147,13 @@ namespace Charmed.Sample.Win8
 				settings.FlyoutWidth = Callisto.Controls.SettingsFlyout.SettingsFlyoutWidth.Wide;
 				settings.HeaderText = "Feeds";
 
-				var viewModel = Ioc.Container.Resolve<SettingsViewModel>();
-				var view = new SettingsView
-				{
-					DataContext = viewModel
-				};
+				var view = new SettingsView();
 				settings.Content = view;
 				settings.HorizontalContentAlignment = HorizontalAlignment.Stretch;
 				settings.VerticalContentAlignment = VerticalAlignment.Stretch;
 				settings.IsOpen = true;
 			});
-			args.Request.ApplicationCommands.Add(settingsCommand);
+			commands.Add(settingsCommand);
 		}
     }
 }

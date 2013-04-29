@@ -9,7 +9,8 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-	x:Name="Root">
+	x:Name="Root"
+	DataContext="{Binding Source={StaticResource Locator}, Path=Settings}">
 	<UserControl.Resources>
 		<Style x:Key="SettingsButtonStyle" TargetType="Button">
 			<Setter Property="Background" Value="{StaticResource ButtonBackgroundThemeBrush}"/>
