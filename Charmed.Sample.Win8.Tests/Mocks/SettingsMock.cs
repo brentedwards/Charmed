@@ -26,5 +26,12 @@ namespace Charmed.Sample.Tests.Mocks
 		{
 			return MockHelper.ExecuteDelegate<string, bool>(this.RemoveDelegate, key);
 		}
+
+
+		public Func<string, bool> ContainsKeyDelegate { get; set; }
+		public bool ContainsKey(string key)
+		{
+			return MockHelper.ExecuteDelegate<string, bool>(this.ContainsKeyDelegate, key);
+		}
 	}
 }

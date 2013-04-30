@@ -28,5 +28,12 @@ namespace Charmed
 		/// <param name="key">The key for the data.</param>
 		/// <returns>Returns true if the data value existed and was removed and false if it did not exist.</returns>
 		bool Remove(string key);
+
+		/// <summary>
+		/// Checks whether there is a setting for the given key.
+		/// </summary>
+		/// <param name="key">The key to check for.</param>
+		/// <returns>Returns true if there is a setting for the given key and false if not.</returns>
+		bool ContainsKey(string key);
 	}
 }

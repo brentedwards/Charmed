@@ -49,5 +49,14 @@ namespace Charmed
 			return ApplicationData.Current.RoamingSettings.Values.Remove(key);
 #endif // WINDOWS_PHONE
 		}
+
+		public bool ContainsKey(string key)
+		{
+#if WINDOWS_PHONE
+			return IsolatedStorageSettings.ApplicationSettings.Contains(key);
+#else
+			return ApplicationData.Current.RoamingSettings.Values.ContainsKey(key);
+#endif // WINDOWS_PHONE
+		}
 	}
 }
