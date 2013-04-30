@@ -1,15 +1,11 @@
-﻿using Callisto.Controls;
-using Charmed.Container;
+﻿using Charmed.Container;
 using Charmed.Sample.Models;
 using Charmed.Sample.ViewModels;
 using Charmed.Sample.Win8.Common;
-using Charmed.Sample.Win8.Views;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Storage;
-using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -22,7 +18,7 @@ namespace Charmed.Sample.Win8
     /// </summary>
     sealed partial class App : Application
     {
-		private ISettingsManager SettingsManager { get; set; }
+		private ShellViewModel ShellViewModel { get; set; }
 
         /// <summary>
         /// Initializes the singleton Application object.  This is the first line of authored code
@@ -49,27 +45,8 @@ namespace Charmed.Sample.Win8
             
             if (rootFrame == null)
             {
-				this.SettingsManager = Ioc.Container.Resolve<ISettingsManager>();
-				this.SettingsManager.Initialize();
-				this.SettingsManager.OnSettingsRequested = OnSettingsRequested;
-
-				if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(Constants.FeedsKey))
-				{
-					// Seed the app with default feeds.
-					var feeds = new string[]
-					{
-						"http://blogs.windows.com/windows/b/windowsexperience/atom.aspx",
-						"http://blogs.windows.com/windows/b/extremewindows/atom.aspx",
-						"http://blogs.windows.com/windows/b/bloggingwindows/atom.aspx",
-						"http://blogs.windows.com/windows_live/b/windowslive/rss.aspx",
-						"http://blogs.windows.com/windows_live/b/developer/atom.aspx",
-						"http://blogs.windows.com/windows_phone/b/wpdev/atom.aspx",
-						"http://blogs.windows.com/windows_phone/b/wmdev/atom.aspx",
-						"http://blogs.windows.com/windows_phone/b/windowsphone/atom.aspx"
-					};
-
-					ApplicationData.Current.RoamingSettings.Values[Constants.FeedsKey] = feeds;
-				}
+				this.ShellViewModel = Ioc.Container.Resolve<ShellViewModel>();
+				this.ShellViewModel.Initialize();
 
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
@@ -132,28 +109,11 @@ namespace Charmed.Sample.Win8
         /// <param name="e">Details about the suspend request.</param>
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
-			this.SettingsManager.Cleanup();
+			this.ShellViewModel.Cleanup();
 
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
-
-		private void OnSettingsRequested(IList<SettingsCommand> commands)
-		{
-			SettingsCommand settingsCommand = new SettingsCommand("SettingNW", "Feeds", (x) =>
-			{
-				SettingsFlyout settings = new SettingsFlyout();
-				settings.FlyoutWidth = Callisto.Controls.SettingsFlyout.SettingsFlyoutWidth.Wide;
-				settings.HeaderText = "Feeds";
-
-				var view = new SettingsView();
-				settings.Content = view;
-				settings.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-				settings.VerticalContentAlignment = VerticalAlignment.Stretch;
-				settings.IsOpen = true;
-			});
-			commands.Add(settingsCommand);
-		}
     }
 }

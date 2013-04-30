@@ -11,6 +11,7 @@ namespace Charmed.Sample.ViewModels
 		{
 			Ioc.Container.Register<MainViewModel>();
 			Ioc.Container.Register<FeedItemViewModel>();
+			Ioc.Container.Register<ShellViewModel>();
 			Ioc.Container.Register<IRssFeedService, RssFeedService>();
 			Ioc.Container.Register<ISerializer, Serializer>();
 			Ioc.Container.Register<INavigator, Navigator>();

@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\FeedItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\FeedItemPage.xaml.cs">
       <DependentUpon>FeedItemPage.xaml</DependentUpon>

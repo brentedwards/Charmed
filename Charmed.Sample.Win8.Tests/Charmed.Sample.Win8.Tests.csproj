@@ -115,6 +115,7 @@
     <Compile Include="Mocks\RssFeedServiceMock.cs" />
     <Compile Include="Mocks\SecondaryPinnerMock.cs" />
     <Compile Include="Mocks\SerializerMock.cs" />
+    <Compile Include="Mocks\SettingsManagerMock.cs" />
     <Compile Include="Mocks\SettingsMock.cs" />
     <Compile Include="Mocks\ShareManagerMock.cs" />
     <Compile Include="Mocks\StorageMock.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="ViewModels\FeedItemViewModelTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
     <Compile Include="ViewModels\SettingsViewModelTests.cs" />
+    <Compile Include="ViewModels\ShellViewModelTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
