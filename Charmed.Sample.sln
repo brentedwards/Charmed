@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6131BB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charmed.Sample.WP8", "Charmed.Sample.WP8\Charmed.Sample.WP8.csproj", "{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,26 @@ Global
 		{CE4E18EB-9175-403C-A2CE-18DF64C32E45}.Release|x86.ActiveCfg = Release|x86
 		{CE4E18EB-9175-403C-A2CE-18DF64C32E45}.Release|x86.Build.0 = Release|x86
 		{CE4E18EB-9175-403C-A2CE-18DF64C32E45}.Release|x86.Deploy.0 = Release|x86
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|ARM.Build.0 = Debug|ARM
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|ARM.Deploy.0 = Debug|ARM
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|x86.ActiveCfg = Debug|x86
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|x86.Build.0 = Debug|x86
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Debug|x86.Deploy.0 = Debug|x86
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|ARM.ActiveCfg = Release|ARM
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|ARM.Build.0 = Release|ARM
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|ARM.Deploy.0 = Release|ARM
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|x64.ActiveCfg = Release|Any CPU
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|x86.ActiveCfg = Release|x86
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|x86.Build.0 = Release|x86
+		{3588EB4B-85C0-4C2D-B14C-EA895846C3C4}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="b79adac9-f982-473e-85da-2cf8a499a976" Publisher="CN=Brent" Version="1.0.0.0" />
+  <Identity Name="Charmed.Sample.Win8" Publisher="CN=Brent" Version="1.0.0.0" />
   <Properties>
     <DisplayName>Charmed.Sample.Win8</DisplayName>
     <PublisherDisplayName>Brent</PublisherDisplayName>
