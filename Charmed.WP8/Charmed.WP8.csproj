@@ -83,6 +83,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Charmed.Win8\Container\IContainer.cs">
+      <Link>Container\IContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Container\Ioc.cs">
+      <Link>Container\Ioc.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Container\SimpleContainer.cs">
+      <Link>Container\SimpleContainer.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\Converters\BoolToVisibilityConverter.cs">
       <Link>Converters\BoolToVisibilityConverter.cs</Link>
     </Compile>
@@ -98,11 +107,26 @@
     <Compile Include="..\Charmed.Win8\Helpers\AsyncHelper.cs">
       <Link>Helpers\AsyncHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\INavigator.cs">
+      <Link>INavigator.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\ISerializer.cs">
       <Link>ISerializer.cs</Link>
     </Compile>
     <Compile Include="..\Charmed.Win8\ISettings.cs">
       <Link>ISettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Messaging\ActionReference.cs">
+      <Link>Messaging\ActionReference.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Messaging\IMessageBus.cs">
+      <Link>Messaging\IMessageBus.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Messaging\MessageBus.cs">
+      <Link>Messaging\MessageBus.cs</Link>
+    </Compile>
+    <Compile Include="..\Charmed.Win8\Navigator.cs">
+      <Link>Navigator.cs</Link>
     </Compile>
     <Compile Include="..\Charmed.Win8\Serializer.cs">
       <Link>Serializer.cs</Link>

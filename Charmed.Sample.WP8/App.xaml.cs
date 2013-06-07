@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Charmed.Container;
+using Charmed.Sample.Models;
+using Charmed.Sample.WP8.Resources;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System;
 using System.Diagnostics;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Charmed.Sample.WP8.Resources;
 
 namespace Charmed.Sample.WP8
 {
@@ -35,6 +36,10 @@ namespace Charmed.Sample.WP8
 			// Language display initialization
 			InitializeLanguage();
 
+			Ioc.Container.RegisterInstance<INavigator>(new Navigator(Ioc.Container.Resolve<ISerializer>(), Ioc.Container, RootFrame));
+
+			InitializeSeedData();
+
 			// Show graphics profiling information while debugging.
 			if (Debugger.IsAttached)
 			{
@@ -55,6 +60,28 @@ namespace Charmed.Sample.WP8
 				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 			}
 
+		}
+
+		private void InitializeSeedData()
+		{
+			var settings = Ioc.Container.Resolve<ISettings>();
+			if (!settings.ContainsKey(Constants.FeedsKey))
+			{
+				// Seed the app with default feeds.
+				var feeds = new string[]
+				{
+					"http://blogs.windows.com/windows/b/windowsexperience/atom.aspx",
+					"http://blogs.windows.com/windows/b/extremewindows/atom.aspx",
+					"http://blogs.windows.com/windows/b/bloggingwindows/atom.aspx",
+					"http://blogs.windows.com/windows_live/b/windowslive/rss.aspx",
+					"http://blogs.windows.com/windows_live/b/developer/atom.aspx",
+					"http://blogs.windows.com/windows_phone/b/wpdev/atom.aspx",
+					"http://blogs.windows.com/windows_phone/b/wmdev/atom.aspx",
+					"http://blogs.windows.com/windows_phone/b/windowsphone/atom.aspx"
+				};
+
+				settings.AddOrUpdate(Constants.FeedsKey, feeds);
+			}
 		}
 
 		// Code to execute when the application is launching (eg, from Start)

@@ -10,19 +10,26 @@ namespace Charmed.Sample.ViewModels
 		public ViewModelLocator()
 		{
 			Ioc.Container.Register<MainViewModel>();
-			Ioc.Container.Register<FeedItemViewModel>();
-			Ioc.Container.Register<ShellViewModel>();
-			Ioc.Container.Register<IRssFeedService, RssFeedService>();
 			Ioc.Container.Register<ISerializer, Serializer>();
-			Ioc.Container.Register<INavigator, Navigator>();
-			Ioc.Container.Register<IShareManager, ShareManager>();
-			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
-			Ioc.Container.Register<ISettingsManager, SettingsManager>();
 			Ioc.Container.Register<ISettings, Settings>();
-			Ioc.Container.Register<IStorage, Storage>();
-			Ioc.Container.Register<SettingsViewModel>();
 			Ioc.Container.RegisterInstance<IMessageBus>(new MessageBus());
 			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
+
+#if NETFX_CORE
+			Ioc.Container.Register<FeedItemViewModel>();
+			Ioc.Container.Register<INavigator, Navigator>();
+
+			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
+
+			Ioc.Container.Register<IRssFeedService, RssFeedService>();
+			Ioc.Container.Register<ShellViewModel>();
+			Ioc.Container.Register<IShareManager, ShareManager>();
+			Ioc.Container.Register<ISettingsManager, SettingsManager>();
+			Ioc.Container.Register<IStorage, Storage>();
+			Ioc.Container.Register<SettingsViewModel>();
+#else
+			Ioc.Container.Register<IRssFeedService, WP8RssFeedService>();
+#endif // NETFX_CORE
 		}
 
 		public MainViewModel Main
@@ -30,6 +37,7 @@ namespace Charmed.Sample.ViewModels
 			get { return Ioc.Container.Resolve<MainViewModel>();}
 		}
 
+#if NETFX_CORE
 		public FeedItemViewModel FeedItem
 		{
 			get { return Ioc.Container.Resolve<FeedItemViewModel>(); }
@@ -39,10 +47,18 @@ namespace Charmed.Sample.ViewModels
 		{
 			get { return Ioc.Container.Resolve<SettingsViewModel>(); }
 		}
+#endif // NETFX_CORE
 
 		public static bool IsInDesignMode
 		{
-			get { return Windows.ApplicationModel.DesignMode.DesignModeEnabled; }
+			get
+			{
+#if NETFX_CORE
+				return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+#else
+				return System.ComponentModel.DesignerProperties.IsInDesignTool;
+#endif // NETFX_CORE
+			}
 		}
 	}
 }
