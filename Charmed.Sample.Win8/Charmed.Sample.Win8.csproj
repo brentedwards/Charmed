@@ -122,6 +122,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Services\IRssFeedService.cs" />
     <Compile Include="Services\RssFeedService.cs" />
+    <Compile Include="Services\Win8RssFeedService.cs" />
     <Compile Include="ViewModels\FeedItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
