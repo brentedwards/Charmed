@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 
@@ -17,7 +19,14 @@ namespace Charmed
 		{
 			var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 
-			var serializedData = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+			string serializedData = null;
+			using (var stream = await file.OpenStreamForReadAsync())
+			{
+				using (var streamReader = new StreamReader(stream))
+				{
+					serializedData = await streamReader.ReadToEndAsync();
+				}
+			}
 
 			T data = default(T);
 			if (!string.IsNullOrWhiteSpace(serializedData))
@@ -34,7 +43,11 @@ namespace Charmed
 
 			var serializedData = this.serializer.Serialize(data);
 
-			await FileIO.WriteTextAsync(file, serializedData, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+			using (var stream = await file.OpenStreamForWriteAsync())
+			{
+				byte[] fileBytes = Encoding.UTF8.GetBytes(serializedData.ToCharArray());
+				await stream.WriteAsync(fileBytes, 0, fileBytes.Length);
+			}
 		}
 	}
 }

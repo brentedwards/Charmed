@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Charmed.Helpers
 {
+	/// <summary>
+	/// Helper class for routing a Button's Clicks to a method on the view model.
+	/// </summary>
 	public sealed class ButtonHelper
 	{
 		public static readonly DependencyProperty MethodNameProperty =

@@ -116,6 +116,9 @@
     <Compile Include="..\Charmed.Win8\ISettings.cs">
       <Link>ISettings.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\IStorage.cs">
+      <Link>IStorage.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\Messaging\ActionReference.cs">
       <Link>Messaging\ActionReference.cs</Link>
     </Compile>
@@ -134,12 +137,16 @@
     <Compile Include="..\Charmed.Win8\Settings.cs">
       <Link>Settings.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\Storage.cs">
+      <Link>Storage.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\ViewModelBase.cs">
       <Link>ViewModelBase.cs</Link>
     </Compile>
     <Compile Include="ApplicationBar\BindableApplicationBar.cs" />
     <Compile Include="ApplicationBar\BindableApplicationBarIconButton.cs" />
     <Compile Include="ApplicationBar\BindableApplicationBarMenuItem.cs" />
+    <Compile Include="Helpers\LongListSelectorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
