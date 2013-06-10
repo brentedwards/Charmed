@@ -99,8 +99,15 @@ namespace Charmed
 		/// <param name="pageState">The state to load.</param>
 		public override void LoadState(object navigationParameter, Dictionary<string, object> pageState)
 		{
-			var deserializedNavigationParameter = this.serializer.Deserialize<TParameter>(navigationParameter.ToString());
-			this.LoadState(deserializedNavigationParameter, pageState);
+			if (navigationParameter != null)
+			{
+				var deserializedNavigationParameter = this.serializer.Deserialize<TParameter>(navigationParameter.ToString());
+				this.LoadState(deserializedNavigationParameter, pageState);
+			}
+			else
+			{
+				this.LoadState(null, pageState);
+			}
 		}
 	}
 }

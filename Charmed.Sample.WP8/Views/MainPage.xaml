@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Charmed.Sample.WP8.Views.MainPage"
+    x:Class="Charmed.Sample.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -7,13 +7,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:conv="clr-namespace:Charmed.Converters;assembly=Charmed.WP8"
+	xmlns:helpers="clr-namespace:Charmed.Helpers;assembly=Charmed.WP8"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-	DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+	DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+	x:Name="Root">
 
 	<phone:PhoneApplicationPage.Resources>
 		<conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -46,12 +48,11 @@
 							<phone:LongListSelector
 								x:Name="Polls"
 								ItemsSource="{Binding Items}"
-								SelectedItem="{Binding SelectedPoll, Mode=TwoWay}"
-								>
-								<!-- helpers:ListViewHelper.ItemClickMethodName="ViewFeed" -->
+								helpers:LongListSelectorHelper.SelectionChangedMethodName="ViewFeed"
+								helpers:LongListSelectorHelper.MethodContext="{Binding ElementName=Root, Path=DataContext}">
 								<phone:LongListSelector.ItemTemplate>
 									<DataTemplate>
-										<Grid Width="250" Height="250" HorizontalAlignment="Left">
+										<Grid HorizontalAlignment="Left">
 											<Grid.RowDefinitions>
 												<RowDefinition />
 												<RowDefinition Height="90" />

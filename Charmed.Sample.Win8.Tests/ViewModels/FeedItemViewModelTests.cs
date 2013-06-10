@@ -21,7 +21,7 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 
 		private FeedItemViewModel GetViewModel()
 		{
-			return new FeedItemViewModel(this.ShareManager, this.Serializer, this.SecondaryPinner, this.Storage);
+			return new FeedItemViewModel(this.Serializer, this.Storage, this.ShareManager, this.SecondaryPinner);
 		}
 
 		private List<string> PropertiesChanged { get; set; }

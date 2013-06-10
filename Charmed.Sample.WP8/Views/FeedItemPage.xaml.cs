@@ -7,12 +7,13 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Charmed.Sample.Common;
 
 namespace Charmed.Sample.Views
 {
-	public partial class MainPage : PhoneApplicationPage
+	public partial class FeedItemPage : NavigationAwarePage
 	{
-		public MainPage()
+		public FeedItemPage()
 		{
 			InitializeComponent();
 		}

@@ -5,46 +5,58 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.UI.StartScreen;
-using Windows.UI.Xaml;
 using System.Linq;
 
 namespace Charmed.Sample.ViewModels
 {
 	public sealed class FeedItemViewModel : ViewModelBase<FeedItem>
 	{
+#if NETFX_CORE
 		private readonly IShareManager shareManager;
 		private readonly ISecondaryPinner secondaryPinner;
+#endif // NETFX_CORE
+
 		private readonly IStorage storage;
 
 		public FeedItemViewModel(
-			IShareManager shareManager,
 			ISerializer serializer,
-			ISecondaryPinner secondaryPinner,
-			IStorage storage)
+			IStorage storage
+#if NETFX_CORE
+			, IShareManager shareManager,
+			ISecondaryPinner secondaryPinner
+#endif // NETFX_CORE
+			)
 			: base(serializer)
 		{
+			this.storage = storage;
+
+#if NETFX_CORE
 			this.shareManager = shareManager;
 			this.secondaryPinner = secondaryPinner;
-			this.storage = storage;
+#endif // NETFX_CORE
 		}
 
 		public override void LoadState(FeedItem navigationParameter, Dictionary<string, object> pageState)
 		{
-			this.shareManager.Initialize();
-			this.shareManager.OnShareRequested = ShareRequested;
-
 			this.FeedItem = navigationParameter;
 
+#if NETFX_CORE
 			this.IsFeedItemPinned = this.secondaryPinner.IsPinned(FormatSecondaryTileId());
+
+			this.shareManager.Initialize();
+			this.shareManager.OnShareRequested = ShareRequested;
+#endif // NETFX_CORE
 		}
 
 		public override void SaveState(Dictionary<string, object> pageState)
 		{
+#if NETFX_CORE
 			this.shareManager.Cleanup();
+#endif // NETFX_CORE
 		}
 
-		public async Task Pin(FrameworkElement anchorElement)
+#if NETFX_CORE
+		public async Task Pin(Windows.UI.Xaml.FrameworkElement anchorElement)
 		{
 			// Pin the feed item, then save it locally to make sure it is still available
 			// when they return.
@@ -52,7 +64,7 @@ namespace Charmed.Sample.ViewModels
 				FormatSecondaryTileId(),
 				this.FeedItem.Title,
 				this.FeedItem.Title,
-				TileOptions.ShowNameOnLogo | TileOptions.ShowNameOnWideLogo,
+				Windows.UI.StartScreen.TileOptions.ShowNameOnLogo | Windows.UI.StartScreen.TileOptions.ShowNameOnWideLogo,
 				new Uri("ms-appx:///Assets/Logo.png"),
 				new Uri("ms-appx:///Assets/WideLogo.png"),
 				this.FeedItem.Id.ToString());
@@ -68,7 +80,7 @@ namespace Charmed.Sample.ViewModels
 			}
 		}
 
-		public async Task Unpin(FrameworkElement anchorElement)
+		public async Task Unpin(Windows.UI.Xaml.FrameworkElement anchorElement)
 		{
 			// Unpin, then delete the feed item locally.
 			this.IsFeedItemPinned = !await this.secondaryPinner.Unpin(
@@ -81,6 +93,7 @@ namespace Charmed.Sample.ViewModels
 				await RemovePinnedFeedItem();
 			}
 		}
+#endif // NETFX_CORE
 
 		private string FormatSecondaryTileId()
 		{
@@ -116,6 +129,7 @@ namespace Charmed.Sample.ViewModels
 			}
 		}
 
+#if NETFX_CORE
 		private void ShareRequested(DataPackage dataPackage)
 		{
 			// Set as many data types as we can.
@@ -135,6 +149,7 @@ namespace Charmed.Sample.ViewModels
 			var html = HtmlFormatHelper.CreateHtmlFormat(htmlBuilder.ToString());
 			dataPackage.SetHtmlFormat(html);
 		}
+#endif // NETFX_CORE
 
 		private FeedItem feedItem;
 		public FeedItem FeedItem

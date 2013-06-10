@@ -30,10 +30,7 @@ namespace Charmed.Sample.ViewModels
 
 		public void ViewFeed(FeedItem feedItem)
 		{
-			// TODO: This is just removed temorarily while bringing in all the project elements.
-#if NETFX_CORE
 			this.navigator.NavigateToViewModel<FeedItemViewModel>(feedItem);
-#endif // NETFX_CORE
 		}
 
 		private void LoadFeedData()
