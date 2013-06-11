@@ -1,35 +1,35 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Microsoft.Phone.Controls;
+using System.Windows;
 
 namespace Charmed.Helpers
 {
 	/// <summary>
-	/// Helper class to assist with making Html content bindable on a WebView.
+	/// Helper class to assist with making Html content bindable on a WebBrowser.
 	/// </summary>
-	public sealed class WebViewHelper
+	public sealed class WebBrowserHelper
 	{
 		public static readonly DependencyProperty HtmlContentProperty =
 			DependencyProperty.RegisterAttached(
 				"HtmlContent",
 				typeof(string),
-				typeof(WebViewHelper),
+				typeof(WebBrowserHelper),
 				new PropertyMetadata(null, new PropertyChangedCallback((sender, args) =>
 				{
-					var webView = sender as WebView;
-					if (webView != null)
+					var webBrowser = sender as WebBrowser;
+					if (webBrowser != null)
 					{
-						webView.NavigateToString(args.NewValue.ToString());
+						webBrowser.NavigateToString(args.NewValue.ToString());
 					}
 				})));
 
 		public static void SetHtmlContent(
-			WebView attached,
+			WebBrowser attached,
 			string htmlContent)
 		{
 			attached.SetValue(HtmlContentProperty, htmlContent);
 		}
 
-		public static string GetHtmlContent(WebView attached)
+		public static string GetHtmlContent(WebBrowser attached)
 		{
 			return (string)attached.GetValue(HtmlContentProperty);
 		}

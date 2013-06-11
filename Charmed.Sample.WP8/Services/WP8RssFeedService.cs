@@ -61,7 +61,11 @@ namespace Charmed.Sample.Services
 								{
 									feedItem.PublishedDate = item.PublishDate.DateTime;
 								}
-								if (item.Summary != null && item.Summary.Text != null)
+								if (item.Content != null && ((TextSyndicationContent)item.Content).Text != null)
+								{
+									feedItem.Content = ((TextSyndicationContent)item.Content).Text;
+								}
+								else if (item.Summary != null && item.Summary.Text != null)
 								{
 									feedItem.Content = item.Summary.Text;
 								}

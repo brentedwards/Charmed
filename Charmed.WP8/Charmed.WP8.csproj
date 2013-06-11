@@ -147,6 +147,9 @@
     <Compile Include="ApplicationBar\BindableApplicationBarIconButton.cs" />
     <Compile Include="ApplicationBar\BindableApplicationBarMenuItem.cs" />
     <Compile Include="Helpers\LongListSelectorHelper.cs" />
+    <Compile Include="Helpers\WebBrowserHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
