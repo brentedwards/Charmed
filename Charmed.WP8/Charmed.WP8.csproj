@@ -110,6 +110,9 @@
     <Compile Include="..\Charmed.Win8\INavigator.cs">
       <Link>INavigator.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\ISecondaryPinner.cs">
+      <Link>ISecondaryPinner.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\ISerializer.cs">
       <Link>ISerializer.cs</Link>
     </Compile>
@@ -140,6 +143,9 @@
     <Compile Include="..\Charmed.Win8\Storage.cs">
       <Link>Storage.cs</Link>
     </Compile>
+    <Compile Include="..\Charmed.Win8\TileInfo.cs">
+      <Link>TileInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Charmed.Win8\ViewModelBase.cs">
       <Link>ViewModelBase.cs</Link>
     </Compile>
@@ -151,6 +157,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecondaryPinner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

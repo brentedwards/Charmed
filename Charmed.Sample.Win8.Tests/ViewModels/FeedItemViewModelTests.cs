@@ -146,9 +146,9 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 
 			Placement actualPlacement = Placement.Default;
 			TileInfo actualTileInfo = null;
-			SecondaryPinner.PinDelegate = (anchorElement, requestPlacement, tileInfo) =>
+			SecondaryPinner.PinDelegate = (tileInfo) =>
 				{
-					actualPlacement = requestPlacement;
+					actualPlacement = tileInfo.RequestPlacement;
 					actualTileInfo = tileInfo;
 
 					return true;
@@ -192,9 +192,9 @@ namespace Charmed.Sample.Win8.Tests.ViewModels
 
 			Placement actualPlacement = Placement.Default;
 			TileInfo actualTileInfo = null;
-			SecondaryPinner.PinDelegate = (anchorElement, requestPlacement, tileInfo) =>
+			SecondaryPinner.PinDelegate = (tileInfo) =>
 			{
-				actualPlacement = requestPlacement;
+				actualPlacement = tileInfo.RequestPlacement;
 				actualTileInfo = tileInfo;
 
 				return false;

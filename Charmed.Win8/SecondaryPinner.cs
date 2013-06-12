@@ -10,15 +10,8 @@ namespace Charmed
 {
 	public sealed class SecondaryPinner : ISecondaryPinner
 	{
-		public async Task<bool> Pin(
-			FrameworkElement anchorElement,
-			Placement requestPlacement,
-			TileInfo tileInfo)
+		public async Task<bool> Pin(TileInfo tileInfo)
 		{
-			if (anchorElement == null)
-			{
-				throw new ArgumentNullException("anchorElement");
-			}
 			if (tileInfo == null)
 			{
 				throw new ArgumentNullException("tileInfo");
@@ -42,24 +35,21 @@ namespace Charmed
 				}
 
 				isPinned = await secondaryTile.RequestCreateForSelectionAsync(
-						GetElementRect(anchorElement), requestPlacement);
+						GetElementRect(tileInfo.AnchorElement), tileInfo.RequestPlacement);
 			}
 
 			return isPinned;
 		}
 
-		public async Task<bool> Unpin(
-			FrameworkElement anchorElement,
-			Placement requestPlacement,
-			string tileId)
+		public async Task<bool> Unpin(TileInfo tileInfo)
 		{
 			var wasUnpinned = false;
 
-			if (SecondaryTile.Exists(tileId))
+			if (SecondaryTile.Exists(tileInfo.TileId))
 			{
-				var secondaryTile = new SecondaryTile(tileId);
+				var secondaryTile = new SecondaryTile(tileInfo.TileId);
 				wasUnpinned = await secondaryTile.RequestDeleteForSelectionAsync(
-					GetElementRect(anchorElement), requestPlacement);
+					GetElementRect(tileInfo.AnchorElement), tileInfo.RequestPlacement);
 			}
 
 			return wasUnpinned;

@@ -60,18 +60,17 @@ namespace Charmed.Sample.ViewModels
 			// Pin the feed item, then save it locally to make sure it is still available
 			// when they return.
 			var tileInfo = new TileInfo(
-				FormatSecondaryTileId(),
+				this.FormatSecondaryTileId(),
 				this.FeedItem.Title,
 				this.FeedItem.Title,
 				Windows.UI.StartScreen.TileOptions.ShowNameOnLogo | Windows.UI.StartScreen.TileOptions.ShowNameOnWideLogo,
 				new Uri("ms-appx:///Assets/Logo.png"),
 				new Uri("ms-appx:///Assets/WideLogo.png"),
-				this.FeedItem.Id.ToString());
-
-			this.IsFeedItemPinned = await this.secondaryPinner.Pin(
 				anchorElement,
 				Windows.UI.Popups.Placement.Above,
-				tileInfo);
+				this.FeedItem.Id.ToString());
+
+			this.IsFeedItemPinned = await this.secondaryPinner.Pin(tileInfo);
 
 			if (this.IsFeedItemPinned)
 			{
@@ -82,10 +81,8 @@ namespace Charmed.Sample.ViewModels
 		public async Task Unpin(Windows.UI.Xaml.FrameworkElement anchorElement)
 		{
 			// Unpin, then delete the feed item locally.
-			this.IsFeedItemPinned = !await this.secondaryPinner.Unpin(
-				anchorElement,
-				Windows.UI.Popups.Placement.Above,
-				this.FormatSecondaryTileId());
+			var tileInfo = new TileInfo(this.FormatSecondaryTileId(), anchorElement, Windows.UI.Popups.Placement.Above);
+			this.IsFeedItemPinned = !await this.secondaryPinner.Unpin(tileInfo);
 
 			if (!this.IsFeedItemPinned)
 			{

@@ -12,6 +12,8 @@ namespace Charmed.Sample.Models
 
 		public const string SecondaryIdFormat = "Charmed.Sample.{0}";
 
+		public const string SecondaryUriFormat = "/Views/MainPage.xaml?{0}";
+
 		public const string FeedsKey = "Feeds";
 	}
 }

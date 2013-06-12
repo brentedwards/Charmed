@@ -10,24 +10,20 @@ namespace Charmed.Sample.Tests.Mocks
 {
 	public class SecondaryPinnerMock : ISecondaryPinner
 	{
-		public Func<FrameworkElement, Placement, TileInfo, bool> PinDelegate { get; set; }
-		public Task<bool> Pin(FrameworkElement anchorElement, Placement requestPlacement, TileInfo tileInfo)
+		public Func<TileInfo, bool> PinDelegate { get; set; }
+		public Task<bool> Pin(TileInfo tileInfo)
 		{
-			return MockHelper.ExecuteDelegateAsync<FrameworkElement, Placement, TileInfo, bool>(
+			return MockHelper.ExecuteDelegateAsync<TileInfo, bool>(
 				this.PinDelegate,
-				anchorElement,
-				requestPlacement,
 				tileInfo);
 		}
 
-		public Func<FrameworkElement, Placement, string, bool> UnpinDelegate { get; set; }
-		public Task<bool> Unpin(FrameworkElement anchorElement, Placement requestPlacement, string tileId)
+		public Func<TileInfo, bool> UnpinDelegate { get; set; }
+		public Task<bool> Unpin(TileInfo tileInfo)
 		{
-			return MockHelper.ExecuteDelegateAsync<FrameworkElement, Placement, string, bool>(
+			return MockHelper.ExecuteDelegateAsync<TileInfo, bool>(
 				this.UnpinDelegate,
-				anchorElement,
-				requestPlacement,
-				tileId);
+				tileInfo);
 		}
 
 		public Func<string, bool> IsPinnedDelegate { get; set; }
