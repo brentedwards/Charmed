@@ -36,18 +36,8 @@
 			<phone:WebBrowser helpers:WebBrowserHelper.HtmlContent="{Binding FeedItem.Content}" />
         </Grid>
 
-		<appBar:BindableApplicationBar>
-			<appBar:BindableApplicationBar.Buttons>
-				<appBar:BindableApplicationBarIconButton
-					IconUri="/Assets/PinIcon.png"
-					Text="pin"
-					ClickMethodName="Pin"/>
-				<appBar:BindableApplicationBarIconButton
-					IconUri="/Assets/UnpinIcon.png"
-					Text="unpin"
-					ClickMethodName="Unpin"/>
-			</appBar:BindableApplicationBar.Buttons>
-		</appBar:BindableApplicationBar>
+		<appBar:BindableApplicationBar
+			Buttons="{Binding AppBarButtons}" />
 	</Grid>
 
 </common:NavigationAwarePage>

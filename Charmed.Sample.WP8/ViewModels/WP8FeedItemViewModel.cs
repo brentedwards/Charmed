@@ -1,5 +1,7 @@
-﻿using Charmed.Sample.Models;
+﻿using Charmed.ApplicationBar;
+using Charmed.Sample.Models;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Charmed.Sample.ViewModels
@@ -12,6 +14,36 @@ namespace Charmed.Sample.ViewModels
 			ISecondaryPinner secondaryPinner)
 			: base(serializer, storage, secondaryPinner)
 		{
+			this.AppBarButtons = new ObservableCollection<BindableApplicationBarIconButton>();
+
+			this.PinButton = new BindableApplicationBarIconButton
+			{
+				IconUri = new Uri("/Assets/PinIcon.png", UriKind.Relative),
+				Text = "pin",
+				ClickMethodName = "Pin"
+			};
+
+			this.UnpinButton = new BindableApplicationBarIconButton
+			{
+				IconUri = new Uri("/Assets/UnpinIcon.png", UriKind.Relative),
+				Text = "unpin",
+				ClickMethodName = "Unpin"
+			};
+		}
+
+		public override void LoadState(FeedItem navigationParameter, System.Collections.Generic.Dictionary<string, object> pageState)
+		{
+			base.LoadState(navigationParameter, pageState);
+
+			this.AppBarButtons.Clear();
+			if (this.secondaryPinner.IsPinned(this.FormatTileIdUrl()))
+			{
+				this.AppBarButtons.Add(this.UnpinButton);
+			}
+			else
+			{
+				this.AppBarButtons.Add(this.PinButton);
+			}
 		}
 
 		public async Task Pin()
@@ -28,7 +60,7 @@ namespace Charmed.Sample.ViewModels
 
 			if (this.IsFeedItemPinned)
 			{
-				await SavePinnedFeedItem();
+				await this.SavePinnedFeedItem();
 			}
 		}
 
@@ -40,7 +72,7 @@ namespace Charmed.Sample.ViewModels
 
 			if (!this.IsFeedItemPinned)
 			{
-				await RemovePinnedFeedItem();
+				await this.RemovePinnedFeedItem();
 			}
 		}
 
@@ -49,5 +81,10 @@ namespace Charmed.Sample.ViewModels
 			var queryString = string.Format("parameter={0}", FeedItem.Id);
 			return string.Format(Constants.SecondaryUriFormat, queryString);
 		}
+
+		public ObservableCollection<BindableApplicationBarIconButton> AppBarButtons { get; private set; }
+
+		private BindableApplicationBarIconButton PinButton { get; set; }
+		private BindableApplicationBarIconButton UnpinButton { get; set; }
 	}
 }
