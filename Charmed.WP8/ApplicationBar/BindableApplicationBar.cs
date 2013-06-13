@@ -21,6 +21,12 @@ namespace Charmed.ApplicationBar
 			typeof(BindableApplicationBar),
 			new PropertyMetadata(new ObservableCollection<object>(), OnBindableMenuItemsChanged));
 
+		public static readonly DependencyProperty ButtonsProperty = DependencyProperty.Register(
+			"Buttons",
+			typeof(IList),
+			typeof(BindableApplicationBar),
+			new PropertyMetadata(new ObservableCollection<object>(), OnBindableButtonsChanged));
+
 		public BindableApplicationBar()
 		{
 			this.applicationBar = new Microsoft.Phone.Shell.ApplicationBar();
@@ -72,12 +78,15 @@ namespace Charmed.ApplicationBar
 				}
 			}
 
-			foreach (var button in this.Buttons)
+			if (!AreButtonsLoaded && this.Buttons != null)
 			{
-				var bindableButton = button as BindableApplicationBarIconButton;
-				if (bindableButton != null)
+				foreach (var button in this.Buttons)
 				{
-					bindableButton.DataContext = this.DataContext;
+					var bindableButton = button as BindableApplicationBarIconButton;
+					if (bindableButton != null)
+					{
+						bindableButton.DataContext = this.DataContext;
+					}
 				}
 			}
 		}
@@ -126,6 +135,42 @@ namespace Charmed.ApplicationBar
 			bindableApplicationBar.AreMenuItemsLoaded = true;
 		}
 
+		private static void OnBindableButtonsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			if (d == null)
+			{
+				throw new ArgumentNullException("d");
+			}
+
+			var bindableApplicationBar = (BindableApplicationBar)d;
+			bindableApplicationBar.Buttons.Clear();
+			var items = e.NewValue as IList;
+			if (items != null)
+			{
+				foreach (var item in items)
+				{
+					var menuItem = GetButton(bindableApplicationBar, item);
+					bindableApplicationBar.Buttons.Add(menuItem);
+				}
+			}
+
+			if (e.OldValue != null)
+			{
+				var oldObservableItems = e.NewValue as INotifyCollectionChanged;
+				if (oldObservableItems != null)
+				{
+					oldObservableItems.CollectionChanged -= bindableApplicationBar.OnButtonsCollectionChanged;
+				}
+			}
+
+			var observableItems = e.NewValue as INotifyCollectionChanged;
+			if (observableItems != null)
+			{
+				observableItems.CollectionChanged += bindableApplicationBar.OnButtonsCollectionChanged;
+			}
+			bindableApplicationBar.AreMenuItemsLoaded = true;
+		}
+
 		private static object GetMenuItem(BindableApplicationBar bindableApplicationBar, object item)
 		{
 			var bindableMenuItem = item as BindableApplicationBarMenuItem;
@@ -138,6 +183,35 @@ namespace Charmed.ApplicationBar
 					bindableMenuItem.ClickMethodName = bindableApplicationBar.MenuItemClickMethodName;
 				}
 				return bindableMenuItem;
+			}
+			else if (item is ApplicationBarMenuItem)
+			{
+				return item;
+			}
+			else
+			{
+				var textProperty = item.GetType().GetProperty(bindableApplicationBar.TextMemberPath);
+				var menuItem = new BindableApplicationBarMenuItem();
+				menuItem.Text = textProperty.GetValue(item).ToString();
+				menuItem.DataContext = bindableApplicationBar.DataContext;
+				menuItem.ClickMethodName = bindableApplicationBar.MenuItemClickMethodName;
+				menuItem.DataItem = item;
+				return menuItem;
+			}
+		}
+
+		private static object GetButton(BindableApplicationBar bindableApplicationBar, object item)
+		{
+			var bindableButton = item as BindableApplicationBarIconButton;
+			if (bindableButton != null)
+			{
+				bindableButton.DataContext = bindableButton.DataContext;
+				bindableButton.DataItem = item;
+				if (!string.IsNullOrEmpty(bindableApplicationBar.MenuItemClickMethodName))
+				{
+					bindableButton.ClickMethodName = bindableApplicationBar.MenuItemClickMethodName;
+				}
+				return bindableButton;
 			}
 			else if (item is ApplicationBarMenuItem)
 			{
@@ -226,6 +300,7 @@ namespace Charmed.ApplicationBar
 		public string MenuItemClickMethodName { get; set; }
 
 		private bool AreMenuItemsLoaded { get; set; }
+		private bool AreButtonsLoaded { get; set; }
 
 		public event EventHandler<ApplicationBarStateChangedEventArgs> StateChanged;
 	}

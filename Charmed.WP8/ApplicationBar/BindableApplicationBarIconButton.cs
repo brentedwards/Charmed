@@ -21,11 +21,28 @@ namespace Charmed.ApplicationBar
 				var clickMethod = this.DataContext.GetType().GetMethod(this.ClickMethodName);
 
 				var parms = clickMethod.GetParameters();
-				clickMethod.Invoke(this.DataContext, null);
+				if (this.DataItem != null && parms != null && parms.Length == 1)
+				{
+					var param = parms[0];
+					var paramType = param.ParameterType;
+
+					var dataItemType = this.DataItem.GetType();
+					if (dataItemType != paramType)
+					{
+						throw new ArgumentException("DataItem is the wrong type.");
+					}
+
+					clickMethod.Invoke(this.DataContext, new[] { this.DataItem });
+				}
+				else
+				{
+					clickMethod.Invoke(this.DataContext, null);
+				}
 			}
 		}
 
 		public string ClickMethodName { get; set; }
 		public object DataContext { get; set; }
+		public object DataItem { get; set; }
 	}
 }
