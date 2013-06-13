@@ -35,15 +35,7 @@ namespace Charmed.Sample.ViewModels
 		{
 			base.LoadState(navigationParameter, pageState);
 
-			this.AppBarButtons.Clear();
-			if (this.secondaryPinner.IsPinned(this.FormatTileIdUrl()))
-			{
-				this.AppBarButtons.Add(this.UnpinButton);
-			}
-			else
-			{
-				this.AppBarButtons.Add(this.PinButton);
-			}
+			UpdateAppBarButtons();
 		}
 
 		public async Task Pin()
@@ -62,6 +54,8 @@ namespace Charmed.Sample.ViewModels
 			{
 				await this.SavePinnedFeedItem();
 			}
+
+			UpdateAppBarButtons();
 		}
 
 		public async Task Unpin()
@@ -74,12 +68,27 @@ namespace Charmed.Sample.ViewModels
 			{
 				await this.RemovePinnedFeedItem();
 			}
+
+			UpdateAppBarButtons();
 		}
 
 		private string FormatTileIdUrl()
 		{
 			var queryString = string.Format("parameter={0}", FeedItem.Id);
 			return string.Format(Constants.SecondaryUriFormat, queryString);
+		}
+
+		private void UpdateAppBarButtons()
+		{
+			this.AppBarButtons.Clear();
+			if (this.secondaryPinner.IsPinned(this.FormatTileIdUrl()))
+			{
+				this.AppBarButtons.Add(this.UnpinButton);
+			}
+			else
+			{
+				this.AppBarButtons.Add(this.PinButton);
+			}
 		}
 
 		public ObservableCollection<BindableApplicationBarIconButton> AppBarButtons { get; private set; }
