@@ -9,10 +9,10 @@ namespace Charmed
 		/// <summary>
 		/// Constructor containing info for pinning a tile.
 		/// </summary>
-		/// <param name="tileId">The Id of the tile to pin</param>
-		/// <param name="shortName">The short name for the tile</param>
-		/// <param name="displayName">The display name for the tile</param>
-		/// <param name="tileOptions">The TileOptions for the tile</param>
+		/// <param name="tileId">The Id of the tile to pin.</param>
+		/// <param name="shortName">The short name for the tile.</param>
+		/// <param name="displayName">The display name for the tile.</param>
+		/// <param name="tileOptions">The TileOptions for the tile.</param>
 		/// <param name="logoUri">The Uri to the tile logo.</param>
 		/// <param name="anchorElement">The anchor element that the pin request dialog will display next to.</param>
 		/// <param name="requestPlacement">The Placement value that tells where the pin request dialog displays in relation to anchorElement.</param>
@@ -43,10 +43,10 @@ namespace Charmed
 		/// <summary>
 		/// Constructor containing info for pinning a tile.
 		/// </summary>
-		/// <param name="tileId">The Id of the tile to pin</param>
-		/// <param name="shortName">The short name for the tile</param>
-		/// <param name="displayName">The display name for the tile</param>
-		/// <param name="tileOptions">The TileOptions for the tile</param>
+		/// <param name="tileId">The Id of the tile to pin.</param>
+		/// <param name="shortName">The short name for the tile.</param>
+		/// <param name="displayName">The display name for the tile.</param>
+		/// <param name="tileOptions">The TileOptions for the tile.</param>
 		/// <param name="logoUri">The Uri to the tile logo.</param>
 		/// <param name="wideLogoUri">The Uri to the wide tile logo.</param>
 		/// <param name="anchorElement">The anchor element that the pin request dialog will display next to.</param>
@@ -80,7 +80,7 @@ namespace Charmed
 		/// <summary>
 		/// Constructor containing info for unpinning a tile.
 		/// </summary>
-		/// <param name="tileId">The Id of the tile to pin</param>
+		/// <param name="tileId">The Id of the tile to pin.</param>
 		/// <param name="anchorElement">The anchor element that the pin request dialog will display next to.</param>
 		/// <param name="requestPlacement">The Placement value that tells where the pin request dialog displays in relation to anchorElement.</param>
 		public TileInfo(
@@ -93,6 +93,39 @@ namespace Charmed
 			this.AnchorElement = anchorElement;
 			this.RequestPlacement = requestPlacement;
 		}
+#else
+		/// <summary>
+		/// Constructor containing info for pinning a tile.
+		/// </summary>
+		/// <param name="tileId">The Id of the tile to pin.</param>
+		/// <param name="displayName">The display name for the tile.</param>
+		/// <param name="appName">The name of the app for the tile.</param>
+		/// <param name="logoUri">The Uri to the tile logo.</param>
+		/// <param name="count">Optional count to display on the tile.</param>
+		public TileInfo(
+			string tileId,
+			string displayName,
+			string appName,
+			Uri logoUri,
+			int? count = null)
+		{
+			this.TileId = tileId;
+			this.DisplayName = displayName;
+			this.AppName = appName;
+			this.LogoUri = logoUri;
+
+			this.Count = count;
+		}
+
+		/// <summary>
+		/// Constructor containing info for unpinning a tile.
+		/// </summary>
+		/// <param name="tileId">The Id of the tile to pin.</param>
+		public TileInfo(
+			string tileId)
+		{
+			this.TileId = tileId;
+		}
 #endif // NETFX_CORE
 
 		public string TileId { get; set; }
@@ -102,6 +135,7 @@ namespace Charmed
 		public Uri LogoUri { get; set; }
 		public Uri WideLogoUri { get; set; }
 
+		public string AppName { get; set; }
 		public int? Count { get; set; }
 
 #if NETFX_CORE

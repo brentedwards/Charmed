@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:helpers="clr-namespace:Charmed.Helpers;assembly=Charmed.WP8"
+	xmlns:appBar="clr-namespace:Charmed.ApplicationBar;assembly=Charmed.WP8"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -34,6 +35,19 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<phone:WebBrowser helpers:WebBrowserHelper.HtmlContent="{Binding FeedItem.Content}" />
         </Grid>
-    </Grid>
+
+		<appBar:BindableApplicationBar>
+			<appBar:BindableApplicationBar.Buttons>
+				<appBar:BindableApplicationBarIconButton
+					IconUri="/Assets/PinIcon.png"
+					Text="pin"
+					ClickMethodName="Pin"/>
+				<appBar:BindableApplicationBarIconButton
+					IconUri="/Assets/UnpinIcon.png"
+					Text="unpin"
+					ClickMethodName="Unpin"/>
+			</appBar:BindableApplicationBar.Buttons>
+		</appBar:BindableApplicationBar>
+	</Grid>
 
 </common:NavigationAwarePage>

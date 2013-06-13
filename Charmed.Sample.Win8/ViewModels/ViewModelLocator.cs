@@ -10,8 +10,8 @@ namespace Charmed.Sample.ViewModels
 		public ViewModelLocator()
 		{
 			Ioc.Container.Register<MainViewModel>();
-			Ioc.Container.Register<FeedItemViewModel>();
 
+			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
 			Ioc.Container.Register<ISerializer, Serializer>();
 			Ioc.Container.Register<ISettings, Settings>();
 			Ioc.Container.Register<IStorage, Storage>();
@@ -19,16 +19,18 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
 
 #if NETFX_CORE
-			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
+			Ioc.Container.Register<FeedItemViewModel, Win8FeedItemViewModel>();
 
 			Ioc.Container.Register<INavigator, Navigator>();
-			Ioc.Container.Register<IRssFeedService, RssFeedService>();
+			Ioc.Container.Register<IRssFeedService, Win8RssFeedService>();
 			Ioc.Container.Register<ShellViewModel>();
 			Ioc.Container.Register<IShareManager, ShareManager>();
 			Ioc.Container.Register<ISettingsManager, SettingsManager>();
 			Ioc.Container.Register<SettingsViewModel>();
 #else
 			Ioc.Container.Register<IRssFeedService, WP8RssFeedService>();
+			Ioc.Container.Register<FeedItemViewModel, WP8FeedItemViewModel>();
+			Ioc.Container.Register<SplashViewModel>();
 #endif // NETFX_CORE
 		}
 
@@ -46,6 +48,11 @@ namespace Charmed.Sample.ViewModels
 		public SettingsViewModel Settings
 		{
 			get { return Ioc.Container.Resolve<SettingsViewModel>(); }
+		}
+#else
+		public SplashViewModel Splash
+		{
+			get { return Ioc.Container.Resolve<SplashViewModel>(); }
 		}
 #endif // NETFX_CORE
 

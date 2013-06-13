@@ -1,8 +1,6 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Charmed
@@ -19,12 +17,13 @@ namespace Charmed
 					Title = tileInfo.DisplayName,
 					BackgroundImage = tileInfo.LogoUri,
 					Count = tileInfo.Count,
-					BackTitle = tileInfo.DisplayName,
+					BackTitle = tileInfo.AppName,
 					BackBackgroundImage = new Uri("", UriKind.Relative),
-					BackContent = tileInfo.DisplayName // TODO: Should this be the app name?
+					BackContent = tileInfo.DisplayName
 				};
 
 				ShellTile.Create(new Uri(tileInfo.TileId, UriKind.Relative), tileData);
+				result = true;
 			}
 
 			return Task.FromResult<bool>(result);
@@ -38,7 +37,7 @@ namespace Charmed
 				tile.Delete();
 			}
 
-			return Task.FromResult<bool>(false);
+			return Task.FromResult<bool>(true);
 		}
 
 		public bool IsPinned(string tileId)

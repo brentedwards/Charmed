@@ -78,7 +78,7 @@ namespace Charmed
 	/// <typeparam name="TParameter"></typeparam>
 	public abstract class ViewModelBase<TParameter> : ViewModelBase
 	{
-		private readonly ISerializer serializer;
+		protected readonly ISerializer serializer;
 
 		public ViewModelBase(ISerializer serializer)
 		{
@@ -106,7 +106,7 @@ namespace Charmed
 			}
 			else
 			{
-				this.LoadState(null, pageState);
+				this.LoadState(default(TParameter), pageState);
 			}
 		}
 	}

@@ -128,6 +128,7 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\Win8FeedItemViewModel.cs" />
     <Compile Include="Views\FeedItemPage.xaml.cs">
       <DependentUpon>FeedItemPage.xaml</DependentUpon>
     </Compile>

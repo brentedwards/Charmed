@@ -120,7 +120,7 @@
     <Compile Include="Mocks\ShareManagerMock.cs" />
     <Compile Include="Mocks\StorageMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\FeedItemViewModelTests.cs" />
+    <Compile Include="ViewModels\Win8FeedItemViewModelTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
     <Compile Include="ViewModels\SettingsViewModelTests.cs" />
     <Compile Include="ViewModels\ShellViewModelTests.cs">

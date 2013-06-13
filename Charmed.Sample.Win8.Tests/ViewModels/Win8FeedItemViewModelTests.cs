@@ -12,16 +12,16 @@ using Windows.UI.Popups;
 namespace Charmed.Sample.Win8.Tests.ViewModels
 {
 	[TestClass]
-	public class FeedItemViewModelTests
+	public class Win8FeedItemViewModelTests
 	{
 		private ShareManagerMock ShareManager { get; set; }
 		private SerializerMock Serializer { get; set; }
 		private SecondaryPinnerMock SecondaryPinner { get; set; }
 		private StorageMock Storage { get; set; }
 
-		private FeedItemViewModel GetViewModel()
+		private Win8FeedItemViewModel GetViewModel()
 		{
-			return new FeedItemViewModel(this.Serializer, this.Storage, this.ShareManager, this.SecondaryPinner);
+			return new Win8FeedItemViewModel(this.Serializer, this.Storage, this.SecondaryPinner, this.ShareManager);
 		}
 
 		private List<string> PropertiesChanged { get; set; }
