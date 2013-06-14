@@ -25,6 +25,7 @@ namespace Charmed.Sample.ViewModels
 		public override async void LoadState(int? navigationParameter, Dictionary<string, object> pageState)
 		{
 			this.navigator.NavigateToViewModel<MainViewModel>();
+			this.navigator.RemoveBackEntry();
 
 			if (navigationParameter.HasValue)
 			{
@@ -38,8 +39,6 @@ namespace Charmed.Sample.ViewModels
 					}
 				}
 			}
-
-			// TODO: Remove this view model from back stack
 		}
 	}
 }
