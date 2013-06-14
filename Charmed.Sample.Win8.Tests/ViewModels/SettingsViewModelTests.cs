@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Charmed.Sample.Win8.Tests.ViewModels
+namespace Charmed.Sample.Tests.ViewModels
 {
 	[TestClass]
 	public class SettingsViewModelTests

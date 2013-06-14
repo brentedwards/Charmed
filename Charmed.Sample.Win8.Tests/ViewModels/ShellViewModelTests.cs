@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Collections.Generic;
 using Windows.UI.ApplicationSettings;
 
-namespace Charmed.Sample.Win8.Tests.ViewModels
+namespace Charmed.Sample.Tests.ViewModels
 {
 	[TestClass]
 	public class ShellViewModelTests

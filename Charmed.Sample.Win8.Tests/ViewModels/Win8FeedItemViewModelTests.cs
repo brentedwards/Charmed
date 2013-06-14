@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Popups;
 
-namespace Charmed.Sample.Win8.Tests.ViewModels
+namespace Charmed.Sample.Tests.ViewModels
 {
 	[TestClass]
 	public class Win8FeedItemViewModelTests
