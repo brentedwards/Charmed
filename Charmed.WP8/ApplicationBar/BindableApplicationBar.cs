@@ -40,23 +40,38 @@ namespace Charmed.ApplicationBar
 
 		private void OnMenuItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			if (e.NewItems != null)
+			if (e.Action == NotifyCollectionChangedAction.Reset)
 			{
-				foreach (var item in e.NewItems)
+				this.applicationBar.MenuItems.Clear();
+			}
+			else if (e.Action == NotifyCollectionChangedAction.Add)
+			{
+				if (e.NewItems != null)
 				{
-					var menuItem = GetMenuItem(this, item);
-					this.applicationBar.MenuItems.Add(menuItem);
+					foreach (var item in e.NewItems)
+					{
+						var menuItem = GetMenuItem(this, item);
+						this.applicationBar.MenuItems.Add(menuItem);
+					}
 				}
 			}
 		}
 
 		private void OnButtonsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			if (e.NewItems != null)
+			if (e.Action == NotifyCollectionChangedAction.Reset)
 			{
-				foreach (var item in e.NewItems)
+				this.applicationBar.Buttons.Clear();
+			}
+			else if (e.Action == NotifyCollectionChangedAction.Add)
+			{
+				if (e.NewItems != null)
 				{
-					this.applicationBar.Buttons.Add(item);
+					foreach (var item in e.NewItems)
+					{
+						var button = GetButton(this, item);
+						this.applicationBar.Buttons.Add(button);
+					}
 				}
 			}
 		}
@@ -176,7 +191,7 @@ namespace Charmed.ApplicationBar
 			var bindableMenuItem = item as BindableApplicationBarMenuItem;
 			if (bindableMenuItem != null)
 			{
-				bindableMenuItem.DataContext = bindableMenuItem.DataContext;
+				bindableMenuItem.DataContext = bindableApplicationBar.DataContext;
 				bindableMenuItem.DataItem = item;
 				if (!string.IsNullOrEmpty(bindableApplicationBar.MenuItemClickMethodName))
 				{
@@ -205,7 +220,7 @@ namespace Charmed.ApplicationBar
 			var bindableButton = item as BindableApplicationBarIconButton;
 			if (bindableButton != null)
 			{
-				bindableButton.DataContext = bindableButton.DataContext;
+				bindableButton.DataContext = bindableApplicationBar.DataContext;
 				bindableButton.DataItem = item;
 				if (!string.IsNullOrEmpty(bindableApplicationBar.MenuItemClickMethodName))
 				{
