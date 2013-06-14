@@ -9,7 +9,8 @@ namespace Charmed
 	{
 		public object Deserialize(Type type, string json)
 		{
-			var bytes = Encoding.Unicode.GetBytes(System.Net.WebUtility.UrlDecode(json));
+			var decoded = System.Net.WebUtility.UrlDecode(json);
+			var bytes = Encoding.Unicode.GetBytes(decoded);
 			using (MemoryStream stream = new MemoryStream(bytes))
 			{
 				var serializer = new DataContractJsonSerializer(type);
@@ -36,7 +37,9 @@ namespace Charmed
 				stream.Position = 0;
 				using (StreamReader reader = new StreamReader(stream))
 				{
-					return System.Net.WebUtility.UrlEncode(reader.ReadToEnd());
+					var serialized = reader.ReadToEnd();
+					var urlEncoded = System.Net.WebUtility.UrlEncode(serialized);
+					return urlEncoded;
 				}
 			}
 		}
