@@ -101,13 +101,16 @@ namespace Charmed
 		{
 			if (navigationParameter != null)
 			{
-				var deserializedNavigationParameter = this.serializer.Deserialize<TParameter>(navigationParameter.ToString());
-				this.LoadState(deserializedNavigationParameter, pageState);
+				var serializedParameter = navigationParameter.ToString();
+				if (!string.IsNullOrWhiteSpace(serializedParameter))
+				{
+					var deserializedNavigationParameter = this.serializer.Deserialize<TParameter>(navigationParameter.ToString());
+					this.LoadState(deserializedNavigationParameter, pageState);
+					return;
+				}
 			}
-			else
-			{
-				this.LoadState(default(TParameter), pageState);
-			}
+			
+			this.LoadState(default(TParameter), pageState);
 		}
 	}
 }
