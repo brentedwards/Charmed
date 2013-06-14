@@ -23,5 +23,16 @@ namespace Charmed.Sample.Tests.Mocks
 				this.NavigateToViewModelDelegate(typeof(TViewModel), parameter);
 			}
 		}
+
+#if WINDOWS_PHONE
+		public Action RemoveBackEntryDelegate { get; set; }
+		public void RemoveBackEntry()
+		{
+			if (this.RemoveBackEntryDelegate != null)
+			{
+				this.RemoveBackEntryDelegate();
+			}
+		}
+#endif // WINDOWS_PHONE
 	}
 }

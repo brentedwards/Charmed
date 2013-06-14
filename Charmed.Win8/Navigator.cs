@@ -15,14 +15,14 @@ namespace Charmed
 		private readonly IContainer container;
 
 #if WINDOWS_PHONE
-		private readonly System.Windows.Controls.Frame frame;
+		private readonly Microsoft.Phone.Controls.PhoneApplicationFrame frame;
 #endif // WINDOWS_PHONE
 
 		public Navigator(
 			ISerializer serializer,
 			IContainer container
 #if WINDOWS_PHONE
-			,System.Windows.Controls.Frame frame
+			, Microsoft.Phone.Controls.PhoneApplicationFrame frame
 #endif // WINDOWS_PHONE
 			)
 		{
@@ -110,5 +110,12 @@ namespace Charmed
 
 			return new Uri(string.Format("{0}.xaml{1}", path, queryString), UriKind.Relative);
 		}
+
+#if WINDOWS_PHONE
+		public void RemoveBackEntry()
+		{
+			this.frame.RemoveBackEntry();
+		}
+#endif // WINDOWS_PHONE
 	}
 }
