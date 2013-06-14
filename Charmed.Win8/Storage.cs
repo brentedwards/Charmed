@@ -39,7 +39,7 @@ namespace Charmed
 
 		public async Task SaveAsync(string fileName, object data)
 		{
-			var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+			var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 
 			var serializedData = this.serializer.Serialize(data);
 
