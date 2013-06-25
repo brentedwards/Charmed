@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Charmed
 {
-	public sealed class SecondaryPinner : ISecondaryPinner
+	public sealed class WP8SecondaryPinner : ISecondaryPinner
 	{
 		public Task<bool> Pin(TileInfo tileInfo)
 		{

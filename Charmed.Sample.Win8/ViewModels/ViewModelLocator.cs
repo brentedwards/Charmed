@@ -11,7 +11,6 @@ namespace Charmed.Sample.ViewModels
 		{
 			Ioc.Container.Register<MainViewModel>();
 
-			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
 			Ioc.Container.Register<ISerializer, Serializer>();
 			Ioc.Container.Register<ISettings, Settings>();
 			Ioc.Container.Register<IStorage, Storage>();
@@ -21,6 +20,8 @@ namespace Charmed.Sample.ViewModels
 #if NETFX_CORE
 			Ioc.Container.Register<FeedItemViewModel, Win8FeedItemViewModel>();
 
+			Ioc.Container.Register<ISecondaryPinner, Win8SecondaryPinner>();
+
 			Ioc.Container.Register<INavigator, Navigator>();
 			Ioc.Container.Register<IRssFeedService, Win8RssFeedService>();
 			Ioc.Container.Register<ShellViewModel>();
@@ -28,6 +29,7 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<ISettingsManager, SettingsManager>();
 			Ioc.Container.Register<SettingsViewModel>();
 #else
+			Ioc.Container.Register<ISecondaryPinner, WP8SecondaryPinner>();
 			Ioc.Container.Register<IRssFeedService, WP8RssFeedService>();
 			Ioc.Container.Register<FeedItemViewModel, WP8FeedItemViewModel>();
 			Ioc.Container.Register<SplashViewModel>();

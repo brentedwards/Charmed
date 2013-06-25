@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace Charmed
 {
-	public sealed class SecondaryPinner : ISecondaryPinner
+	public sealed class Win8SecondaryPinner : ISecondaryPinner
 	{
 		public async Task<bool> Pin(TileInfo tileInfo)
 		{
