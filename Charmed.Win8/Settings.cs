@@ -1,6 +1,39 @@
-﻿#if WINDOWS_PHONE
+#if WINDOWS_PHONE
 using System.IO.IsolatedStorage;
-#endif // WINDOWS_PHONE
+using Windows.Storage;
+
+namespace Charmed
+{
+	public sealed class Settings : ISettings
+	{
+		public void AddOrUpdate(string key, object value)
+		{
+			IsolatedStorageSettings.ApplicationSettings[key] = value;
+			IsolatedStorageSettings.ApplicationSettings.Save();
+		}
+
+		public bool TryGetValue<T>(string key, out T value)
+		{
+			return IsolatedStorageSettings.ApplicationSettings.TryGetValue<T>(key, out value);
+
+		}
+
+
+		public bool Remove(string key)
+		{
+			var result = IsolatedStorageSettings.ApplicationSettings.Remove(key);
+			IsolatedStorageSettings.ApplicationSettings.Save();
+			return result;
+		}
+
+		public bool ContainsKey(string key)
+		{
+			return IsolatedStorageSettings.ApplicationSettings.Contains(key);
+		}
+	}
+}
+
+#else
 
 using Windows.Storage;
 
@@ -10,19 +43,11 @@ namespace Charmed
 	{
 		public void AddOrUpdate(string key, object value)
 		{
-#if WINDOWS_PHONE
-			IsolatedStorageSettings.ApplicationSettings[key] = value;
-			IsolatedStorageSettings.ApplicationSettings.Save();
-#else
 			ApplicationData.Current.RoamingSettings.Values[key] = value;
-#endif // WINDOWS_PHONE
 		}
 
 		public bool TryGetValue<T>(string key, out T value)
 		{
-#if WINDOWS_PHONE
-			return IsolatedStorageSettings.ApplicationSettings.TryGetValue<T>(key, out value);
-#else
 			var result = false;
 			if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
 			{
@@ -35,28 +60,18 @@ namespace Charmed
 			}
 
 			return result;
-#endif // WINDOWS_PHONE
 		}
 
 
 		public bool Remove(string key)
 		{
-#if WINDOWS_PHONE
-			var result = IsolatedStorageSettings.ApplicationSettings.Remove(key);
-			IsolatedStorageSettings.ApplicationSettings.Save();
-			return result;
-#else
 			return ApplicationData.Current.RoamingSettings.Values.Remove(key);
-#endif // WINDOWS_PHONE
 		}
 
 		public bool ContainsKey(string key)
 		{
-#if WINDOWS_PHONE
-			return IsolatedStorageSettings.ApplicationSettings.Contains(key);
-#else
 			return ApplicationData.Current.RoamingSettings.Values.ContainsKey(key);
-#endif // WINDOWS_PHONE
 		}
 	}
 }
+#endif // WINDOWS_PHONE
