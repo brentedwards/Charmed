@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Charmed.Sample.ViewModels
 {
-	public abstract class FeedItemViewModel : ViewModelBase<FeedItem>
+	public class FeedItemViewModel : ViewModelBase<FeedItem>
 	{
 		private readonly IStorage storage;
 		protected readonly ISecondaryPinner secondaryPinner;

@@ -7,9 +7,14 @@
     xmlns:common="using:Charmed.Sample.Universal.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+	xmlns:helpers="using:Charmed.Helpers"
+	xmlns:converters="using:Charmed.Converters"
+    mc:Ignorable="d"
+	DataContext="{Binding Source={StaticResource Locator}, Path=FeedItem}">
 
     <Page.Resources>
+		<converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+		<converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
     </Page.Resources>
 
     <!--
@@ -43,5 +48,18 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-    </Grid>
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBlock Text="{Binding FeedItem.Author}" />
+			<WebView
+				helpers:WebViewHelper.HtmlContent="{Binding FeedItem.Content}"
+				IsRightTapEnabled="False"
+				Margin="0,0,0,110"
+				Grid.Row="1" />
+		</Grid>
+	</Grid>
 </Page>

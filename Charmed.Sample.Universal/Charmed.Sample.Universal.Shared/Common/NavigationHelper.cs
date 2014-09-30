@@ -319,6 +319,8 @@ namespace Charmed.Sample.Universal.Common
 			var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
 			this._pageKey = "Page-" + this.Frame.BackStackDepth;
 
+			var viewModel = this.Page.DataContext as ViewModelBase;
+
 			if (e.NavigationMode == NavigationMode.New)
 			{
 				// Clear existing state for forward navigation when adding a new page to the
@@ -346,6 +348,11 @@ namespace Charmed.Sample.Universal.Common
 				{
 					this.LoadState(this, new LoadStateEventArgs(e.Parameter, (Dictionary<String, Object>)frameState[this._pageKey]));
 				}
+			}
+
+			if (viewModel != null)
+			{
+				viewModel.LoadState(e.Parameter, null);
 			}
 		}
 
