@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>4ed055d7-6718-4faa-8871-57d9501d5c49</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Charmed.Universal.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Container\IContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Container\Ioc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Container\SimpleContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\InverseBoolConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AsyncHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ButtonHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ListViewHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TextBoxHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\WebViewHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)INavigator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISecondaryPinner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messaging\ActionReference.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messaging\IMessageBus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messaging\MessageBus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SecondaryPinner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModelBase.cs" />
+  </ItemGroup>
+</Project>

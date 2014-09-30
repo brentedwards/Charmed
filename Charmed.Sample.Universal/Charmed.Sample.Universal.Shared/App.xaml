@@ -1,0 +1,17 @@
+﻿<Application
+    x:Class="Charmed.Sample.Universal.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Charmed.Sample.Universal"
+	xmlns:vm="using:Charmed.Sample.ViewModels">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Style/CharmedStyle.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+
+			<x:String x:Key="AppName">Charmed Reader</x:String>
+			<vm:ViewModelLocator x:Name="Locator" />
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>
