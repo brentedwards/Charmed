@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:converters="using:Charmed.Converters"
+	xmlns:helpers="using:Charmed.Helpers"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -42,7 +43,7 @@
         </Grid.RowDefinitions>
 
         <!-- Horizontal scrolling grid -->
-        <GridView
+		<GridView
             x:Name="itemGridView"
             AutomationProperties.AutomationId="ItemGridView"
             AutomationProperties.Name="Grouped Items"
@@ -51,21 +52,10 @@
             ItemsSource="{Binding Source={StaticResource feedsViewSource}}"
             SelectionMode="None"
             IsSwipeEnabled="false"
-			ItemTemplate="{StaticResource FeedItemTemplate}">
-            <!--<GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Left" Width="250" Height="250">
-                        <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                        </Border>
-                        <StackPanel VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
-                            <TextBlock Text="{Binding Title}" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextBlockStyle}" Height="60" Margin="15,0,15,0"/>
-                            <TextBlock Text="{Binding Subtitle}" Foreground="{ThemeResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>-->
-            <GridView.ItemsPanel>
+			ItemTemplate="{StaticResource FeedItemTemplate}"
+			IsItemClickEnabled="True"
+			helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
+			<GridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsWrapGrid GroupPadding="0,0,70,0"/>
                 </ItemsPanelTemplate>
