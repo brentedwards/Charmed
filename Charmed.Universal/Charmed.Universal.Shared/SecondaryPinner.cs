@@ -24,16 +24,19 @@ namespace Charmed
 			{
 				var secondaryTile = new SecondaryTile(
 					tileInfo.TileId,
-					tileInfo.ShortName,
 					tileInfo.DisplayName,
 					tileInfo.Arguments,
-					tileInfo.TileOptions,
-					tileInfo.LogoUri);
+					tileInfo.LogoUri,
+					tileInfo.TileSize);
 
 				if (tileInfo.WideLogoUri != null)
 				{
-					secondaryTile.WideLogo = tileInfo.WideLogoUri;
+					secondaryTile.VisualElements.Wide310x150Logo = tileInfo.WideLogoUri;
 				}
+
+				secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
+				secondaryTile.VisualElements.ShowNameOnWide310x150Logo = true;
+				secondaryTile.VisualElements.ShowNameOnSquare310x310Logo = true;
 
 				isPinned = await secondaryTile.RequestCreateForSelectionAsync(
 						GetElementRect(tileInfo.AnchorElement), tileInfo.RequestPlacement);

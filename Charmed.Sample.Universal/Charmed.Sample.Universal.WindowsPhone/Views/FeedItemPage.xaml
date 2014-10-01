@@ -7,10 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
 	xmlns:helpers="using:Charmed.Helpers"
+	xmlns:converters="using:Charmed.Converters"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 	DataContext="{Binding Source={StaticResource Locator}, Path=FeedItem}">
 
-    <Grid x:Name="LayoutRoot">
+	<Page.Resources>
+		<converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+		<converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+	</Page.Resources>
+
+	<Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -34,4 +40,20 @@
 			<WebView helpers:WebViewHelper.HtmlContent="{Binding FeedItem.Content}" />
         </Grid>
     </Grid>
+	<Page.BottomAppBar>
+		<CommandBar Padding="10,0,10,0">
+			<AppBarButton
+				Icon="Pin"
+				Label="Pin to Start"
+				Visibility="{Binding IsFeedItemPinned, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+				helpers:ButtonHelper.MethodName="Pin"
+				helpers:ButtonHelper.Parameter="{Binding FeedItem}" />
+			<AppBarButton
+				Icon="UnPin"
+				Label="Unpin from Start"
+				Visibility="{Binding IsFeedItemPinned, Converter={StaticResource BoolToVisibilityConverter}}"
+				helpers:ButtonHelper.MethodName="Unpin"
+				helpers:ButtonHelper.Parameter="{Binding FeedItem}" />
+		</CommandBar>
+	</Page.BottomAppBar>
 </Page>

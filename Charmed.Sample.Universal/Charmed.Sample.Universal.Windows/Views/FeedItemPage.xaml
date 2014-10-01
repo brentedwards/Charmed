@@ -62,4 +62,20 @@
 				Grid.Row="1" />
 		</Grid>
 	</Grid>
+	<Page.BottomAppBar>
+		<CommandBar Padding="10,0,10,0">
+			<AppBarButton
+				Icon="Pin"
+				Label="Pin to Start"
+				Visibility="{Binding IsFeedItemPinned, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+				helpers:ButtonHelper.MethodName="Pin"
+				helpers:ButtonHelper.Parameter="{Binding FeedItem}" />
+			<AppBarButton
+				Icon="UnPin"
+				Label="Unpin from Start"
+				Visibility="{Binding IsFeedItemPinned, Converter={StaticResource BoolToVisibilityConverter}}"
+				helpers:ButtonHelper.MethodName="Unpin"
+				helpers:ButtonHelper.Parameter="{Binding FeedItem}" />
+		</CommandBar>
+	</Page.BottomAppBar>
 </Page>
