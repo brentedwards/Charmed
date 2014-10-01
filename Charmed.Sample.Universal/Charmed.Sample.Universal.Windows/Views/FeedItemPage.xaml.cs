@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Charmed.Sample.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Charmed.Sample.Universal.Common;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -14,15 +14,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Grouped Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234231
+// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace Charmed.Sample.Views
 {
 	/// <summary>
-	/// A page that displays a grouped collection of items.
+	/// A basic page that provides characteristics common to most applications.
 	/// </summary>
-	public sealed partial class MainPage : Page
+	public sealed partial class FeedItemPage : Page
 	{
+
 		private NavigationHelper navigationHelper;
 
 		/// <summary>
@@ -31,21 +32,20 @@ namespace Charmed.Sample.Views
 		/// </summary>
 		public NavigationHelper NavigationHelper
 		{
-			get
-			{
-				return this.navigationHelper;
-			}
+			get { return this.navigationHelper; }
 		}
 
-		public MainPage()
+
+		public FeedItemPage()
 		{
 			this.InitializeComponent();
 			this.navigationHelper = new NavigationHelper(this);
 			this.navigationHelper.LoadState += navigationHelper_LoadState;
+			this.navigationHelper.SaveState += navigationHelper_SaveState;
 		}
 
 		/// <summary>
-		/// Populates the page with content passed during navigation.  Any saved state is also
+		/// Populates the page with content passed during navigation. Any saved state is also
 		/// provided when recreating a page from a prior session.
 		/// </summary>
 		/// <param name="sender">
@@ -54,10 +54,21 @@ namespace Charmed.Sample.Views
 		/// <param name="e">Event data that provides both the navigation parameter passed to
 		/// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
 		/// a dictionary of state preserved by this page during an earlier
-		/// session.  The state will be null the first time a page is visited.</param>
+		/// session. The state will be null the first time a page is visited.</param>
 		private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
-			// TODO: Assign a collection of bindable groups to this.DefaultViewModel["Groups"]
+		}
+
+		/// <summary>
+		/// Preserves state associated with this page in case the application is suspended or the
+		/// page is discarded from the navigation cache.  Values must conform to the serialization
+		/// requirements of <see cref="SuspensionManager.SessionState"/>.
+		/// </summary>
+		/// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
+		/// <param name="e">Event data that provides an empty dictionary to be populated with
+		/// serializable state.</param>
+		private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+		{
 		}
 
 		#region NavigationHelper registration

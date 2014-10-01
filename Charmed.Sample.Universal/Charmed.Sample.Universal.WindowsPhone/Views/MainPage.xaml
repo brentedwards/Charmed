@@ -1,0 +1,98 @@
+﻿<Page
+    x:Class="Charmed.Sample.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Charmed.Sample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:conv="using:Charmed.Converters"
+	xmlns:helpers="using:Charmed.Helpers"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+	DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+
+	<Page.Resources>
+		<conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+	</Page.Resources>
+
+	<Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="CHARMED READER" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+			<Pivot
+				ItemsSource="{Binding FeedData}">
+				<Pivot.HeaderTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Title}" />
+					</DataTemplate>
+				</Pivot.HeaderTemplate>
+				<Pivot.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<ListView
+								x:Name="Polls"
+								ItemsSource="{Binding Items}"
+								helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<Grid HorizontalAlignment="Left">
+											<Grid.RowDefinitions>
+												<RowDefinition />
+												<RowDefinition Height="90" />
+											</Grid.RowDefinitions>
+
+											<Border Background="White" Opacity="0.2" />
+
+											<Grid Grid.Row="1" Margin="15,5,15,10">
+												<Grid.RowDefinitions>
+													<RowDefinition Height="*" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+
+												<TextBlock
+													Foreground="White"
+													Text="{Binding Title}"
+													FontSize="16"
+													LineHeight="18"
+													ToolTipService.ToolTip="{Binding Title}" />
+												<TextBlock
+													Grid.Row="1"
+													Foreground="White"
+													Opacity="0.5"
+													VerticalAlignment="Bottom"
+													Text="{Binding Author}" />
+											</Grid>
+										</Grid>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+							</ListView>
+						</Grid>
+					</DataTemplate>
+				</Pivot.ItemTemplate>
+			</Pivot>
+			<Grid
+				Background="#66000000"
+				Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}">
+				<ProgressBar
+					IsIndeterminate="True"
+					IsEnabled="{Binding IsBusy}"
+					VerticalAlignment="Top"/>
+			</Grid>
+        </Grid>
+    </Grid>
+</Page>
