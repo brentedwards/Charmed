@@ -57,24 +57,5 @@ namespace Charmed
 
 			return Type.GetType(viewName.Replace("Model", string.Empty));
 		}
-
-		private Uri ResolveViewUri(Type viewType, object parameter = null)
-		{
-			var queryString = string.Empty;
-			if (parameter != null)
-			{
-				var serializedParameter = this.serializer.Serialize(parameter);
-				queryString = string.Format("?parameter={0}", serializedParameter);
-			}
-
-			var match = System.Text.RegularExpressions.Regex.Match(viewType.FullName, @"\.Views.*");
-			if (match == null || match.Captures.Count == 0)
-			{
-				throw new ArgumentException("Views must exist in Views namespace.");
-			}
-			var path = match.Captures[0].Value.Replace('.', '/');
-
-			return new Uri(string.Format("{0}.xaml{1}", path, queryString), UriKind.Relative);
-		}
 	}
 }
