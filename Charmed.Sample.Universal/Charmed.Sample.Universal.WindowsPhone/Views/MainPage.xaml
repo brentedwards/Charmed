@@ -47,7 +47,8 @@
 							<ListView
 								x:Name="Polls"
 								ItemsSource="{Binding Items}"
-								helpers:ListViewHelper.ItemClickMethodName="ViewFeed">
+								helpers:ListViewHelper.ItemClickMethodName="ViewFeed"
+								helpers:ListViewHelper.MethodContext="{Binding ElementName=LayoutRoot, Path=DataContext}">
 								<ListView.ItemTemplate>
 									<DataTemplate>
 										<Grid HorizontalAlignment="Left">
