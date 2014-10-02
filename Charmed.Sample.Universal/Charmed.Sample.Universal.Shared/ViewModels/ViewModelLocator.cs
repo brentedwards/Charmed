@@ -19,10 +19,10 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<FeedItemViewModel>();
 			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
 			Ioc.Container.Register<IRssFeedService, RssFeedService>();
+			Ioc.Container.Register<INavigator, Navigator>();
 
 #if WINDOWS_APP
 
-			Ioc.Container.Register<INavigator, Navigator>();
 			Ioc.Container.Register<ShellViewModel, WindowsShellViewModel>();
 			Ioc.Container.Register<IShareManager, ShareManager>();
 			Ioc.Container.Register<ISettingsManager, SettingsManager>();
