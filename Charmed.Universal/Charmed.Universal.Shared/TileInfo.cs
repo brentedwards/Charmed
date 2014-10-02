@@ -86,7 +86,6 @@ namespace Charmed
 		}
 
 		public string TileId { get; set; }
-		public string ShortName { get; set; }
 		public string DisplayName { get; set; }
 		public string Arguments { get; set; }
 		public Uri LogoUri { get; set; }
