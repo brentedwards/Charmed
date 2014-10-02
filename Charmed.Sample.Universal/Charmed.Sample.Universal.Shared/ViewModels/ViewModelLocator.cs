@@ -20,16 +20,16 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
 			Ioc.Container.Register<IRssFeedService, RssFeedService>();
 
-#if NETFX_CORE
+#if WINDOWS_APP
 
 			Ioc.Container.Register<INavigator, Navigator>();
-			Ioc.Container.Register<ShellViewModel>();
-			//Ioc.Container.Register<IShareManager, ShareManager>();
-			//Ioc.Container.Register<ISettingsManager, SettingsManager>();
+			Ioc.Container.Register<ShellViewModel, WindowsShellViewModel>();
+			Ioc.Container.Register<IShareManager, ShareManager>();
+			Ioc.Container.Register<ISettingsManager, SettingsManager>();
 			Ioc.Container.Register<SettingsViewModel>();
 #else
-			Ioc.Container.Register<SplashViewModel>();
-#endif // NETFX_CORE
+			Ioc.Container.Register<ShellViewModel>();
+#endif // WINDOWS_APP
 		}
 
 		public MainViewModel Main

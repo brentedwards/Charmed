@@ -1,29 +1,21 @@
-﻿//using Callisto.Controls;
-using Charmed.Sample.Models;
+﻿using Charmed.Sample.Models;
 using System.Collections.Generic;
-//using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 
 namespace Charmed.Sample.ViewModels
 {
-	public sealed class ShellViewModel : ViewModelBase
+	public class ShellViewModel : ViewModelBase
 	{
-		//private readonly ISettingsManager settingsManager;
 		private readonly ISettings settings;
 
 		public ShellViewModel(
-			//ISettingsManager settingsManager,
 			ISettings settings)
 		{
-			//this.settingsManager = settingsManager;
 			this.settings = settings;
 		}
 
-		public void Initialize()
+		public virtual void Initialize()
 		{
-			//this.settingsManager.Initialize();
-			//this.settingsManager.OnSettingsRequested = OnSettingsRequested;
-
 			if (!this.settings.ContainsKey(Constants.FeedsKey))
 			{
 				// Seed the app with default feeds.
@@ -37,26 +29,8 @@ namespace Charmed.Sample.ViewModels
 			}
 		}
 
-		public void Cleanup()
+		public virtual void Cleanup()
 		{
-			//this.settingsManager.Cleanup();
 		}
-
-		//private void OnSettingsRequested(IList<SettingsCommand> commands)
-		//{
-		//	SettingsCommand settingsCommand = new SettingsCommand("FeedsSetting", "Feeds", (x) =>
-		//	{
-		//		SettingsFlyout settings = new SettingsFlyout();
-		//		settings.FlyoutWidth = Callisto.Controls.SettingsFlyout.SettingsFlyoutWidth.Wide;
-		//		settings.HeaderText = "Feeds";
-
-		//		var view = new SettingsView();
-		//		settings.Content = view;
-		//		settings.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-		//		settings.VerticalContentAlignment = VerticalAlignment.Stretch;
-		//		settings.IsOpen = true;
-		//	});
-		//	commands.Add(settingsCommand);
-		//}
 	}
 }

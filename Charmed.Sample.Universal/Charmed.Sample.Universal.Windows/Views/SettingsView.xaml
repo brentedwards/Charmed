@@ -1,0 +1,68 @@
+﻿<SettingsFlyout
+	x:Name="Root"
+    x:Class="Charmed.Sample.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Charmed.Sample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:charmed="using:Charmed.Helpers"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="Feeds"
+    d:DesignWidth="346"
+	DataContext="{Binding Source={StaticResource Locator}, Path=Settings}">
+
+    <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+
+        <!-- The StackPanel(s) below define individual content sections -->
+
+        <!-- Content Section 1-->
+        <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
+
+            <!-- Section 1 header -->
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Feeds" />
+
+            <!-- Section 1 body -->
+			<ItemsControl ItemsSource="{Binding Feeds}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Text="{Binding}" />
+							<Button
+								Grid.Column="1"
+								Content="Remove"
+								charmed:ButtonHelper.MethodName="RemoveFeed"
+								charmed:ButtonHelper.Parameter="{Binding}"
+								charmed:ButtonHelper.MethodContext="{Binding ElementName=Root, Path=DataContext}"/>
+						</Grid>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+
+			<Grid Margin="0,20,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBox
+					charmed:TextBoxHelper.BindableText="{Binding NewFeed, Mode=TwoWay}"/>
+				<Button
+					Content="Add"
+					Grid.Column="1"
+					charmed:ButtonHelper.MethodName="AddFeed"/>
+			</Grid>
+
+		</StackPanel>
+
+        <!-- Define more Content Sections below as necessary -->
+
+    </StackPanel>
+</SettingsFlyout>
