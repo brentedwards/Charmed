@@ -16,7 +16,6 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<IStorage, Storage>();
 			Ioc.Container.RegisterInstance<IMessageBus>(new MessageBus());
 			Ioc.Container.RegisterInstance<IContainer>(Ioc.Container);
-			Ioc.Container.Register<FeedItemViewModel>();
 			Ioc.Container.Register<ISecondaryPinner, SecondaryPinner>();
 			Ioc.Container.Register<IRssFeedService, RssFeedService>();
 			Ioc.Container.Register<INavigator, Navigator>();
@@ -27,8 +26,10 @@ namespace Charmed.Sample.ViewModels
 			Ioc.Container.Register<IShareManager, ShareManager>();
 			Ioc.Container.Register<ISettingsManager, SettingsManager>();
 			Ioc.Container.Register<SettingsViewModel>();
+			Ioc.Container.Register<FeedItemViewModel, WindowsFeedItemViewModel>();
 #else
 			Ioc.Container.Register<ShellViewModel>();
+			Ioc.Container.Register<FeedItemViewModel>();
 #endif // WINDOWS_APP
 		}
 
