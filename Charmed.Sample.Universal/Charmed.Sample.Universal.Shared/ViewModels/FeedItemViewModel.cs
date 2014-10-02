@@ -25,6 +25,8 @@ namespace Charmed.Sample.ViewModels
 		public override void LoadState(FeedItem navigationParameter, Dictionary<string, object> pageState)
 		{
 			this.FeedItem = navigationParameter;
+
+			this.IsFeedItemPinned = this.secondaryPinner.IsPinned(this.FormatSecondaryTileId());
 		}
 
 		public async Task Pin(Windows.UI.Xaml.FrameworkElement anchorElement)
