@@ -77,7 +77,18 @@ namespace Charmed.Helpers
 					dataContext = button.DataContext;
 				}
 
-				var method = dataContext.GetType().GetTypeInfo().GetDeclaredMethod(methodName);
+				var typeInfo = dataContext.GetType().GetTypeInfo();
+				var method = typeInfo.GetDeclaredMethod(methodName);
+				while (method == null && typeInfo.BaseType != null)
+				{
+					typeInfo = typeInfo.BaseType.GetTypeInfo();
+					method = typeInfo.GetDeclaredMethod(methodName);
+				}
+
+				if (method == null)
+				{
+					throw new ArgumentException(string.Format("Method '{0}' not found on type '{1}'.", methodName, dataContext.GetType().Name));
+				}
 				var parms = method.GetParameters();
 
 				object[] parameters = null;
