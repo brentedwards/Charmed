@@ -9,14 +9,11 @@ namespace Charmed
 	public sealed class Navigator : INavigator
 	{
 		private readonly ISerializer serializer;
-		private readonly IContainer container;
 
 		public Navigator(
-			ISerializer serializer,
-			IContainer container)
+			ISerializer serializer)
 		{
 			this.serializer = serializer;
-			this.container = container;
 		}
 
 		public void NavigateToViewModel<TViewModel>(object parameter = null)
